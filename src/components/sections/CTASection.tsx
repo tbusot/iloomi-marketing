@@ -12,12 +12,12 @@ export function CTASection() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Start Your Journey{' '}
+            Start Your Story{' '}
             <span className="text-marine-teal">Today</span>
           </h2>
           <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            Join thousands of women who have taken control of their fertility
-            health with Iloomi. Download free and start tracking in minutes.
+            Join thousands who are preserving their life stories with ILOOMI.
+            Download free during beta and start creating your lasting legacy.
           </p>
         </motion.div>
 
@@ -42,19 +42,16 @@ export function CTASection() {
             </div>
           </a>
 
-          {/* Google Play Button */}
-          <a
-            href="#"
-            className="inline-flex items-center justify-center gap-3 bg-white text-dark-green px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-colors"
-          >
+          {/* Google Play Button - Coming Soon */}
+          <div className="inline-flex items-center justify-center gap-3 bg-white/20 text-white px-8 py-4 rounded-full font-medium cursor-not-allowed">
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
             </svg>
             <div className="text-left">
-              <div className="text-xs opacity-70">Get it on</div>
+              <div className="text-xs opacity-70">Coming Soon to</div>
               <div className="text-lg font-semibold -mt-0.5">Google Play</div>
             </div>
-          </a>
+          </div>
         </motion.div>
 
         {/* Trust badges */}
@@ -73,7 +70,7 @@ export function CTASection() {
                 clipRule="evenodd"
               />
             </svg>
-            <span>100% Private</span>
+            <span>End-to-End Encrypted</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -83,13 +80,13 @@ export function CTASection() {
                 clipRule="evenodd"
               />
             </svg>
-            <span>No Credit Card Required</span>
+            <span>Free During Beta</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
             </svg>
-            <span>4.9 Star Rating</span>
+            <span>Collaborate with Family</span>
           </div>
         </motion.div>
       </div>

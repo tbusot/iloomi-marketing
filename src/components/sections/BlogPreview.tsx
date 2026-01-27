@@ -8,33 +8,33 @@ import type { BlogPost } from '@/types';
 const placeholderPosts: BlogPost[] = [
   {
     _id: '1',
-    title: 'Understanding Your Fertile Window',
-    slug: { current: 'understanding-fertile-window' },
+    title: 'How to Start Writing Your Life Story',
+    slug: { current: 'how-to-start-writing-life-story' },
     excerpt:
-      'Learn how to identify your most fertile days and maximize your chances of conception.',
-    readingTime: 5,
+      'Practical tips and prompts to help you begin documenting your life experiences and memories for future generations.',
+    readingTime: 6,
     publishedAt: '2024-01-15',
-    author: 'Dr. Sarah Chen',
+    author: 'ILOOMI Team',
   },
   {
     _id: '2',
-    title: 'The Science Behind Cycle Tracking',
-    slug: { current: 'science-behind-cycle-tracking' },
+    title: 'The Power of Family Collaboration in Memoir Writing',
+    slug: { current: 'family-collaboration-memoir-writing' },
     excerpt:
-      'Discover how modern technology and ancient wisdom combine for accurate predictions.',
-    readingTime: 7,
+      'Discover how involving family members can enrich your biography with diverse perspectives and forgotten memories.',
+    readingTime: 5,
     publishedAt: '2024-01-10',
-    author: 'Emma Williams',
+    author: 'ILOOMI Team',
   },
   {
     _id: '3',
-    title: 'Nutrition Tips for Each Cycle Phase',
-    slug: { current: 'nutrition-tips-cycle-phase' },
+    title: 'Creating a Lasting Legacy: Why Your Story Matters',
+    slug: { current: 'creating-lasting-legacy' },
     excerpt:
-      'Optimize your diet throughout your menstrual cycle for better energy and mood.',
-    readingTime: 6,
+      'Your life experiences and wisdom deserve to be preserved. Learn why documenting your story is one of the greatest gifts you can give.',
+    readingTime: 7,
     publishedAt: '2024-01-05',
-    author: 'Dr. Maria Lopez',
+    author: 'ILOOMI Team',
   },
 ];
 
@@ -63,7 +63,7 @@ export function BlogPreview({ posts = placeholderPosts }: BlogPreviewProps) {
               transition={{ delay: 0.1 }}
               className="text-xl text-dark-green/60 max-w-lg"
             >
-              Expert insights and tips for your fertility journey.
+              Tips and inspiration for preserving your life story.
             </motion.p>
           </div>
           <motion.div

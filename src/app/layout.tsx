@@ -17,21 +17,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Iloomi - Fertility Tracking Made Simple",
-  description: "Track your fertility journey with confidence using Iloomi's intelligent cycle tracking and personalized insights.",
-  keywords: ["fertility", "cycle tracking", "ovulation", "period tracker", "women's health"],
-  authors: [{ name: "Iloomi" }],
+  title: "ILOOMI - The Collaborative Biographer",
+  description: "Stories told together. Memories cherished forever. Capture and preserve your life story with the help of AI and your loved ones. Create a lasting legacy for generations to come.",
+  keywords: ["biography", "memoir", "life story", "family history", "legacy", "storytelling", "collaborative writing", "AI biographer"],
+  authors: [{ name: "ILOOMI" }],
   openGraph: {
-    title: "Iloomi - Fertility Tracking Made Simple",
-    description: "Track your fertility journey with confidence using Iloomi's intelligent cycle tracking and personalized insights.",
+    title: "ILOOMI - The Collaborative Biographer",
+    description: "Stories told together. Memories cherished forever. Capture and preserve your life story with the help of AI and your loved ones.",
     type: "website",
     locale: "en_US",
-    siteName: "Iloomi",
+    siteName: "ILOOMI",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iloomi - Fertility Tracking Made Simple",
-    description: "Track your fertility journey with confidence using Iloomi's intelligent cycle tracking and personalized insights.",
+    title: "ILOOMI - The Collaborative Biographer",
+    description: "Stories told together. Memories cherished forever. Capture and preserve your life story with the help of AI and your loved ones.",
   },
 };
 

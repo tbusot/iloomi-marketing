@@ -10,33 +10,33 @@ import type { FAQ } from '@/types';
 const placeholderFAQs = [
   {
     id: '1',
-    title: 'How accurate are the fertility predictions?',
+    title: 'Why should I use ILOOMI?',
     content:
-      'Our predictions become more accurate over time as we learn your unique cycle patterns. After tracking 3 cycles, most users see 95%+ accuracy for period predictions and highly reliable fertile window estimates.',
+      'ILOOMI preserves your stories for future generations, creating professionally-written biographies with multimedia elements like photos and videos. It\'s the perfect way to document your life and create a lasting legacy.',
   },
   {
     id: '2',
-    title: 'Is my data private and secure?',
+    title: 'How does ILOOMI work?',
     content:
-      'Absolutely. We use end-to-end encryption and your data is stored locally on your device. We never sell your personal health information to third parties, and you can delete your data at any time.',
+      'Our AI analyzes your conversations using natural language processing and machine learning to identify key life events, people, and places. Human editors then refine the content to ensure quality while maintaining your authentic voice.',
   },
   {
     id: '3',
-    title: 'Can I use Iloomi if I have irregular cycles?',
+    title: 'Is my data private and secure?',
     content:
-      "Yes! Iloomi is designed to work with all cycle types, including irregular ones. Our AI adapts to your unique patterns and provides predictions even when your cycle varies.",
+      'Absolutely. All conversations and data are encrypted with state-of-the-art security measures. Access is restricted to authorized personnel only, and you maintain full control over who can view your story.',
   },
   {
     id: '4',
-    title: 'Is the app free to use?',
+    title: 'Can family members contribute to my story?',
     content:
-      'Iloomi offers a free version with essential tracking features. Our premium subscription unlocks advanced insights, detailed analytics, and personalized health recommendations.',
+      'Yes! You can invite collaborators with customizable viewing and editing permissions. Family and friends can add their own memories, photos, and perspectives to create a richer, more complete narrative.',
   },
   {
     id: '5',
-    title: 'How do I get started?',
+    title: 'How can I share my finished story?',
     content:
-      'Simply download the app from the App Store or Google Play, create your profile, and start logging your cycle. The app will guide you through the setup process.',
+      'Stories can be exported as EPUB or PDF, or shared via a private link with controlled access levels. You decide who gets to read your story and how they can access it.',
   },
 ];
 
@@ -77,7 +77,7 @@ export function FAQSection({ faqs }: FAQSectionProps) {
             transition={{ delay: 0.1 }}
             className="text-xl text-dark-green/60"
           >
-            Everything you need to know about Iloomi.
+            Everything you need to know about ILOOMI.
           </motion.p>
         </div>
 
