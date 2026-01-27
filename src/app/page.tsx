@@ -8,6 +8,7 @@ import {
   FAQSection,
   CTASection,
 } from '@/components/sections';
+import { Ticker } from '@/components/ui';
 import type { BlogPost, FAQ } from '@/types';
 
 async function getHomePageData() {
@@ -28,6 +29,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <Ticker />
       <ProductFeatures />
       <HowItWorks />
       <BlogPreview posts={blogPosts} />
