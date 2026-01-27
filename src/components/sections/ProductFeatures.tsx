@@ -53,6 +53,30 @@ const features = [
       </svg>
     ),
   },
+  {
+    id: 'security',
+    title: 'Secure & Private',
+    description:
+      'Your stories are protected with end-to-end encryption. You control who can view and contribute to your biography. Your data stays private and secure.',
+    color: 'purple',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'generations',
+    title: 'For Generations to Come',
+    description:
+      'Create something that outlasts you. Your biography becomes a treasured family heirloom, passing your wisdom, experiences, and perspective to future generations.',
+    color: 'marine-teal',
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+      </svg>
+    ),
+  },
 ];
 
 function FeatureCard({

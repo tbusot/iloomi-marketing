@@ -8,30 +8,30 @@ import type { BlogPost } from '@/types';
 const placeholderPosts: BlogPost[] = [
   {
     _id: '1',
-    title: 'How to Start Writing Your Life Story',
-    slug: { current: 'how-to-start-writing-life-story' },
+    title: 'How to Write a Memoir in 5 Steps',
+    slug: { current: 'how-to-write-memoir-5-steps' },
     excerpt:
-      'Practical tips and prompts to help you begin documenting your life experiences and memories for future generations.',
-    readingTime: 6,
+      'A comprehensive guide to getting started with your memoir, from finding your voice to organizing your stories.',
+    readingTime: 8,
     publishedAt: '2024-01-15',
     author: 'ILOOMI Team',
   },
   {
     _id: '2',
-    title: 'The Power of Family Collaboration in Memoir Writing',
-    slug: { current: 'family-collaboration-memoir-writing' },
+    title: 'How to Write an Obituary in 5 Steps',
+    slug: { current: 'how-to-write-obituary-5-steps' },
     excerpt:
-      'Discover how involving family members can enrich your biography with diverse perspectives and forgotten memories.',
-    readingTime: 5,
+      'Learn how to craft a meaningful obituary that honors a life well-lived and celebrates lasting memories.',
+    readingTime: 6,
     publishedAt: '2024-01-10',
     author: 'ILOOMI Team',
   },
   {
     _id: '3',
-    title: 'Creating a Lasting Legacy: Why Your Story Matters',
-    slug: { current: 'creating-lasting-legacy' },
+    title: 'How to Organize a Life Story in 5 Steps',
+    slug: { current: 'how-to-organize-life-story-5-steps' },
     excerpt:
-      'Your life experiences and wisdom deserve to be preserved. Learn why documenting your story is one of the greatest gifts you can give.',
+      'Discover effective strategies for structuring your life experiences into a compelling narrative arc.',
     readingTime: 7,
     publishedAt: '2024-01-05',
     author: 'ILOOMI Team',
@@ -54,7 +54,7 @@ export function BlogPreview({ posts = placeholderPosts }: BlogPreviewProps) {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-bold text-dark-green mb-4"
             >
-              From Our <span className="text-purple">Blog</span>
+              Looking for help to <span className="text-purple">get started?</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -63,7 +63,7 @@ export function BlogPreview({ posts = placeholderPosts }: BlogPreviewProps) {
               transition={{ delay: 0.1 }}
               className="text-xl text-dark-green/60 max-w-lg"
             >
-              Tips and inspiration for preserving your life story.
+              Resources & guides to help you get started writing your memoir and biography.
             </motion.p>
           </div>
           <motion.div

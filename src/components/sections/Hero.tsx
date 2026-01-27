@@ -39,18 +39,11 @@ export function Hero() {
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.5 }}
-              className="text-2xl text-dark-green/80 mb-4 font-serif italic"
+              className="text-xl md:text-2xl text-dark-green/70 mb-8 max-w-lg"
             >
-              Stories told together. Memories cherished forever.
-            </motion.p>
-
-            <motion.p
-              variants={fadeInUp}
-              transition={{ duration: 0.5 }}
-              className="text-xl text-dark-green/70 mb-8 max-w-lg"
-            >
-              Capture and preserve your life story with the help of AI and your
-              loved ones. Create a lasting legacy for generations to come.
+              Stories told together. Memories cherished forever. Create your life
+              story collaboratively with friends and loved ones, guided by an AI
+              biographer available whenever you need it.
             </motion.p>
 
             <motion.div

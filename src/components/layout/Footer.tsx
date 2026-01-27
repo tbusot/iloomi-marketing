@@ -2,17 +2,16 @@ import Link from 'next/link';
 
 const footerLinks = {
   product: [
-    { href: '/#features', label: 'Features' },
+    { href: '/#features', label: 'Product' },
     { href: '/#how-it-works', label: 'How It Works' },
-    { href: '/#download', label: 'Download' },
+    { href: '/#download', label: 'Join Beta' },
   ],
   resources: [
-    { href: '/blog', label: 'Blog' },
+    { href: '/blog', label: 'Our Blog' },
     { href: '/faq', label: 'FAQ' },
   ],
-  legal: [
-    { href: '/privacy', label: 'Privacy Policy' },
-    { href: '/terms', label: 'Terms of Service' },
+  careers: [
+    { href: '#', label: 'Coming Soon' },
   ],
 };
 
@@ -68,15 +67,15 @@ export function Footer() {
   return (
     <footer className="bg-dark-green text-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand & Mission */}
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block mb-4">
               <span className="text-3xl font-bold font-serif">iloomi</span>
             </Link>
             <p className="text-white/80 mb-6 max-w-sm">
-              The collaborative biographer. Stories told together. Memories cherished forever.
-              Preserve your life story with the help of AI and your loved ones.
+              We believe the most extraordinary tales lie in personal non-fiction narratives.
+              Stories told together across generations, preserved forever.
             </p>
             {/* App Store Buttons */}
             <div className="flex gap-3">
@@ -142,18 +141,32 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Legal Links */}
+          {/* Careers Links */}
           <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
+            <h3 className="font-semibold mb-4">Careers</h3>
             <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
+              {footerLinks.careers.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
+                  <span className="text-white/50">{link.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Connect Links */}
+          <div>
+            <h3 className="font-semibold mb-4">Connect</h3>
+            <ul className="space-y-3">
+              {socialLinks.map((social) => (
+                <li key={social.name}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-white/70 hover:text-white transition-colors"
                   >
-                    {link.label}
-                  </Link>
+                    {social.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -163,21 +176,18 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/60 text-sm">
-            &copy; {new Date().getFullYear()} Iloomi. All rights reserved.
+            &copy; {new Date().getFullYear()} Iloomi Inc. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label={social.name}
-              >
-                {social.icon}
-              </a>
-            ))}
+          <div className="flex items-center gap-6 text-white/60 text-sm">
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms & Conditions
+            </Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <a href="mailto:info@iloomi.com" className="hover:text-white transition-colors">
+              info@iloomi.com
+            </a>
           </div>
         </div>
       </div>

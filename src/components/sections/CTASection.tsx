@@ -11,13 +11,14 @@ export function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Start Your Story{' '}
-            <span className="text-marine-teal">Today</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            Try Iloomi <span className="text-marine-teal">today</span>
           </h2>
+          <p className="text-2xl text-white/90 mb-4 font-medium">
+            Start your Story
+          </p>
           <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            Join thousands who are preserving their life stories with ILOOMI.
-            Download free during beta and start creating your lasting legacy.
+            Iloomi is available on iOS. Android coming soon.
           </p>
         </motion.div>
 

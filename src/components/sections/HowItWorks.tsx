@@ -91,7 +91,7 @@ export function HowItWorks() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-dark-green mb-6"
           >
-            How It <span className="text-marine-teal">Works</span>
+            Tell your story, <span className="text-marine-teal">step by step</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export function HowItWorks() {
             transition={{ delay: 0.1 }}
             className="text-xl text-dark-green/60 max-w-2xl mx-auto"
           >
-            Start preserving your life story in just a few simple steps.
+            From your first memory to your finished biography, we guide you every step of the way.
           </motion.p>
         </div>
 
