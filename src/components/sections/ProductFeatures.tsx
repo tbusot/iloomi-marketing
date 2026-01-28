@@ -1,181 +1,245 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 
-const features = [
+/* ──────────────────────────────────────────────
+   Feature 1 – "Capture Your Life Story"
+   Centered heading + horizontal chapter cards
+   ────────────────────────────────────────────── */
+
+const chapterCards = [
+  { chapter: 2, title: 'Sharing a Spirit of Creativity', authors: 'by Laura and Sue', time: '10 min read' },
+  { chapter: 6, title: 'Tying the Knot with a Twist', authors: 'by Pam and Justin', time: '8 min read' },
+  { chapter: 3, title: "A Mother and Daughter's Unforgettable Journey", authors: 'by Kara', time: '16 min read' },
+  { chapter: 7, title: 'Homeward Bound: The Siblings Reunite', authors: 'by Stewart', time: '7 min read' },
+  { chapter: 7, title: 'The Magical Flatirons', authors: 'by Kara, Jake, and Anna', time: '10 min read' },
+  { chapter: 12, title: "Toddlers' Imaginations Take Flight", authors: 'by Lauren and Paul', time: '9 min read' },
+];
+
+/* ──────────────────────────────────────────────
+   Features 2–5 – alternating two-column blocks
+   ────────────────────────────────────────────── */
+
+const twoColFeatures = [
   {
-    id: 'capture',
-    title: 'Capture Your Life Story',
-    description:
-      'Our guided experience helps you document your life events accurately and meaningfully. With an expert AI biographer available on-demand, you\'ll never face a blank page alone.',
-    color: 'purple',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-      </svg>
-    ),
+    label: 'Share Your Story',
+    heading: 'Collaborate with friends and family to tell your story',
+    body: 'Your friends and family can contribute memories, photos, and stories to help create a complete and accurate picture of your life.',
+    imagePosition: 'right' as const,
+    imageContent: 'chat',
   },
   {
-    id: 'collaborate',
-    title: 'Share Your Story',
-    description:
-      'Invite friends and family to contribute their memories, photos, and perspectives. Create a comprehensive, multi-viewpoint narrative that captures the full picture of your life.',
-    color: 'marine-teal',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
+    label: 'Create a Lasting Legacy',
+    heading: 'Write your biography, leave your mark for future generations',
+    body: 'Your biography is a chance to share your experiences, and your unique perspective on the world.',
+    imagePosition: 'left' as const,
+    imageContent: 'book',
   },
   {
-    id: 'legacy',
-    title: 'Create a Lasting Legacy',
-    description:
-      'Your experiences and unique worldview deserve to be preserved for generations. Create memoirs, biographies, eulogies, or family heirlooms that will be treasured forever.',
-    color: 'purple',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
+    label: '24/7 Expert Biographer',
+    heading: 'Work on your own schedule — or whenever inspiration strikes',
+    body: 'You can work on your biography at your own pace, at your own time. You only need to check whenever is most convenient for you.',
+    imagePosition: 'right' as const,
+    imageContent: 'lifestyle',
   },
   {
-    id: 'biographer',
-    title: '24/7 Expert Biographer',
-    description:
-      'Work at your own pace with our AI-powered biographer always ready to help. Save drafts, pick up where you left off, and receive guidance whenever you need it.',
-    color: 'marine-teal',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    ),
-  },
-  {
-    id: 'security',
-    title: 'Secure & Private',
-    description:
-      'Your stories are protected with end-to-end encryption. You control who can view and contribute to your biography. Your data stays private and secure.',
-    color: 'purple',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-      </svg>
-    ),
-  },
-  {
-    id: 'generations',
-    title: 'For Generations to Come',
-    description:
-      'Create something that outlasts you. Your biography becomes a treasured family heirloom, passing your wisdom, experiences, and perspective to future generations.',
-    color: 'marine-teal',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-      </svg>
-    ),
+    label: 'Create a Legacy',
+    heading: 'Keep your story safe and secure for generations',
+    body: 'We use state-of-the-art security measures to protect your data. You can choose to keep your story alive for generations.',
+    imagePosition: 'left' as const,
+    imageContent: 'family',
   },
 ];
 
-function FeatureCard({
-  feature,
-  index,
-}: {
-  feature: (typeof features)[0];
-  index: number;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const isReversed = index % 2 === 1;
-
+function ChatMockup() {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${
-        isReversed ? 'md:flex-row-reverse' : ''
-      }`}
-    >
-      <div className={isReversed ? 'md:order-2' : ''}>
-        <div
-          className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${
-            feature.color === 'purple'
-              ? 'bg-purple/10 text-purple'
-              : 'bg-marine-teal/10 text-marine-teal'
-          }`}
-        >
-          {feature.icon}
+    <div className="bg-off-white rounded-2xl p-6 shadow-sm h-full flex flex-col justify-center max-w-lg mx-auto">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-marine-teal to-purple flex items-center justify-center shrink-0">
+          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
         </div>
-        <h3 className="text-3xl md:text-4xl font-bold text-dark-green mb-4">
-          {feature.title}
-        </h3>
-        <p className="text-lg text-dark-green/70 leading-relaxed">
-          {feature.description}
-        </p>
+        <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+          <p className="text-sm text-dark-green">What other things do you remember from the trip?</p>
+        </div>
       </div>
-      <div className={isReversed ? 'md:order-1' : ''}>
-        {/* Feature image placeholder */}
-        <div
-          className={`aspect-square rounded-3xl flex items-center justify-center ${
-            feature.color === 'purple'
-              ? 'bg-gradient-to-br from-purple/10 to-purple/5'
-              : 'bg-gradient-to-br from-marine-teal/10 to-marine-teal/5'
-          }`}
-        >
-          <div className="text-center p-8">
-            <div
-              className={`w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center ${
-                feature.color === 'purple'
-                  ? 'bg-purple/20 text-purple'
-                  : 'bg-marine-teal/20 text-marine-teal'
-              }`}
-            >
-              {feature.icon}
-            </div>
-            <p className="text-dark-green/40 text-sm">Feature image placeholder</p>
+      <div className="flex justify-end mb-3">
+        <div className="bg-marine-teal/10 rounded-2xl rounded-tr-sm px-4 py-3 max-w-sm">
+          <p className="text-sm text-dark-green">
+            One thing I&apos;ll never forget is the time we were surrounded by wolves. We were hiking in the
+            backcountry when we heard a pack of wolves howling. We stopped and listened, and then
+            we saw them emerge from the trees. There were at least a dozen of them, and they were
+            circling us.
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2 self-end text-xs text-dark-green/40">
+        <span>I was so scared, but I&apos;m glad I got to experience that. It was ...</span>
+        <div className="w-6 h-6 rounded-full bg-purple/30 shrink-0" />
+      </div>
+    </div>
+  );
+}
+
+function BookCoverMockup() {
+  return (
+    <div className="relative aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-b from-dark-green/70 to-dark-green">
+      <div className="absolute inset-0 bg-gradient-to-b from-marine-teal/20 to-transparent" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white">
+        <p className="text-xs tracking-widest uppercase opacity-60 mb-4">Chapter 7</p>
+        <h3 className="text-3xl md:text-4xl font-serif italic text-center leading-tight mb-8">
+          The
+          <br />
+          Magical
+          <br />
+          Flatirons
+        </h3>
+        <div className="flex items-center gap-2 mt-auto">
+          <div className="flex -space-x-2">
+            <div className="w-8 h-8 rounded-full bg-marine-teal/40 border-2 border-white/20" />
+            <div className="w-8 h-8 rounded-full bg-purple/40 border-2 border-white/20" />
+            <div className="w-8 h-8 rounded-full bg-dark-green/40 border-2 border-white/20" />
+          </div>
+          <div className="text-sm">
+            <p className="text-white/80">by Kara, Jake, and Anna</p>
+            <p className="text-white/50 text-xs">Aug 12 • 10 min read</p>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
+}
+
+function ImagePlaceholder({ label, icon }: { label: string; icon: React.ReactNode }) {
+  return (
+    <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-dark-green/8 to-marine-teal/8 flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-16 h-16 mx-auto mb-3 bg-dark-green/10 rounded-full flex items-center justify-center text-dark-green/30">
+          {icon}
+        </div>
+        <p className="text-dark-green/30 text-sm">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+function getImageComponent(type: string) {
+  switch (type) {
+    case 'chat': return <ChatMockup />;
+    case 'book': return <BookCoverMockup />;
+    case 'lifestyle': return (
+      <ImagePlaceholder
+        label="Lifestyle image"
+        icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
+      />
+    );
+    case 'family': return (
+      <ImagePlaceholder
+        label="Family image"
+        icon={<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>}
+      />
+    );
+    default: return null;
+  }
 }
 
 export function ProductFeatures() {
   return (
-    <section id="features" className="py-24 bg-white">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center mb-20">
-          <motion.h2
+    <section id="features">
+      {/* ── Feature 1: Capture Your Life Story ── */}
+      <div className="py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-dark-green mb-6"
+            className="text-center mb-16"
           >
-            Everything You Need to{' '}
-            <span className="text-purple">Tell Your Story</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-dark-green/60 max-w-2xl mx-auto"
-          >
-            Powerful features designed to help you preserve your memories and
-            create a meaningful legacy.
-          </motion.p>
-        </div>
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-marine-teal mb-4">
+              Capture Your Life Story
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-dark-green mb-6 font-serif">
+              Your expert biographer.
+              <br />
+              On-demand.
+            </h2>
+            <p className="text-lg text-dark-green/60 max-w-2xl mx-auto">
+              Iloomi helps you write your life story, one step at a time. With our guided
+              experience, you can capture your life story in a way that is both accurate
+              and meaningful.
+            </p>
+          </motion.div>
 
-        <div className="space-y-24">
-          {features.map((feature, index) => (
-            <FeatureCard key={feature.id} feature={feature} index={index} />
-          ))}
+          {/* Chapter Cards Carousel */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="flex gap-5 overflow-x-auto pb-4 hide-scrollbar snap-x snap-mandatory">
+              {chapterCards.map((card, i) => (
+                <div key={i} className="shrink-0 w-[200px] snap-start">
+                  <div className="aspect-[3/4] rounded-2xl overflow-hidden relative bg-gradient-to-b from-dark-green/60 to-dark-green shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark-green/90 to-transparent" />
+                    <div className="absolute inset-0 flex flex-col justify-between p-4 text-white">
+                      <p className="text-[10px] tracking-widest uppercase bg-marine-teal/30 self-start px-2 py-0.5 rounded">
+                        Chapter {card.chapter}
+                      </p>
+                      <div>
+                        <h4 className="font-serif text-base leading-tight mb-3 italic">
+                          {card.title}
+                        </h4>
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 rounded-full bg-white/30 border border-white/20 shrink-0" />
+                          <div className="text-[10px]">
+                            <p className="text-white/80">{card.authors}</p>
+                            <p className="text-white/50">{card.time}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* ── Features 2–5: Alternating two-column blocks ── */}
+      {twoColFeatures.map((feature, i) => (
+        <div key={i} className="py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center`}
+            >
+              {/* Image side */}
+              <div className={feature.imagePosition === 'right' ? 'lg:order-2' : ''}>
+                {getImageComponent(feature.imageContent)}
+              </div>
+
+              {/* Text side */}
+              <div className={feature.imagePosition === 'right' ? 'lg:order-1' : ''}>
+                <p className="text-sm font-semibold tracking-[0.2em] uppercase text-marine-teal mb-4">
+                  {feature.label}
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold text-dark-green mb-6">
+                  {feature.heading}
+                </h2>
+                <p className="text-lg text-dark-green/60 leading-relaxed">
+                  {feature.body}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      ))}
     </section>
   );
 }

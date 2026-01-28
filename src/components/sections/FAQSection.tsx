@@ -1,95 +1,78 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
-import { Accordion } from '@/components/ui/Accordion';
 import type { FAQ } from '@/types';
 
-// Placeholder FAQs for initial render - matches iloomi.com
 const placeholderFAQs = [
-  {
-    id: '1',
-    title: 'Why should I use Iloomi?',
-    content:
-      'Iloomi preserves your stories for future generations, creating professionally-written biographies with multimedia elements like photos and videos. It\'s the perfect way to document your life and create a lasting legacy.',
-  },
-  {
-    id: '2',
-    title: 'How does Iloomi work?',
-    content:
-      'Our AI biographer guides you through conversations to capture your life story. It identifies key events, people, and places, then helps you organize everything into a compelling narrative. You work at your own pace with drafts you can edit anytime.',
-  },
-  {
-    id: '3',
-    title: 'Is my data private and secure?',
-    content:
-      'Absolutely. All conversations and data are encrypted with state-of-the-art security measures. You maintain full control over who can view your story, and your data is never shared without your explicit permission.',
-  },
-  {
-    id: '4',
-    title: 'Can I collaborate with others on my story?',
-    content:
-      'Yes! You can invite family and friends to contribute their memories, photos, and perspectives. Collaborators can have customizable viewing and editing permissions to create a richer, more complete narrative.',
-  },
-  {
-    id: '5',
-    title: 'How do I know if my story is accurate?',
-    content:
-      'You have complete editorial control over your biography. Review and edit every detail, add context, and ensure your authentic voice comes through. Our AI assists but you make all final decisions.',
-  },
-  {
-    id: '6',
-    title: 'How can I share my finished story?',
-    content:
-      'Stories can be exported as EPUB or PDF, or shared via a private link with controlled access levels. Keep it private for family or share publicly—you decide who reads your story.',
-  },
-  {
-    id: '7',
-    title: 'How long does it take to create a memoir?',
-    content:
-      'There\'s no set timeline—work at your own pace. Some complete their story in weeks, others take months or years. Iloomi saves your progress so you can pick up whenever inspiration strikes.',
-  },
-  {
-    id: '8',
-    title: 'Can I update my story after publishing?',
-    content:
-      'Yes! Your biography is a living document. Add new chapters, update existing content, or include new photos and memories anytime. Your story grows with you.',
-  },
-  {
-    id: '9',
-    title: 'Can I use Iloomi for family history research?',
-    content:
-      'Absolutely! Iloomi is perfect for capturing family histories, preserving stories from multiple generations, and creating a comprehensive family archive that can be passed down.',
-  },
-  {
-    id: '10',
-    title: 'Is Iloomi only for older people?',
-    content:
-      'Not at all! Anyone can benefit from documenting their life story. Young adults, parents, professionals—everyone has experiences worth preserving for future generations.',
-  },
-  {
-    id: '11',
-    title: 'Can I use Iloomi for my business or organization?',
-    content:
-      'Yes! Iloomi can be used to create company histories, founder stories, organizational narratives, and more. Contact us for enterprise solutions.',
-  },
-  {
-    id: '12',
-    title: 'What is the cost?',
-    content:
-      'Iloomi is free to use while we are in Beta. We expect to launch as a paid service with a basic free version after the beta period ends.',
-  },
+  { id: '1', title: 'Why should I use Iloomi?', content: 'Iloomi preserves your stories for future generations, creating professionally-written biographies with multimedia elements like photos and videos. It\'s the perfect way to document your life and create a lasting legacy.' },
+  { id: '2', title: 'How does Iloomi work?', content: 'Our AI biographer guides you through conversations to capture your life story. It identifies key events, people, and places, then helps you organize everything into a compelling narrative. You work at your own pace with drafts you can edit anytime.' },
+  { id: '3', title: 'Is my data private?', content: 'Absolutely. All conversations and data are encrypted with state-of-the-art security measures. You maintain full control over who can view your story, and your data is never shared without your explicit permission.' },
+  { id: '4', title: 'Can I collaborate with others on my story?', content: 'Yes! You can invite family and friends to contribute their memories, photos, and perspectives. Collaborators can have customizable viewing and editing permissions to create a richer, more complete narrative.' },
+  { id: '5', title: 'How do I know that my story will be accurate?', content: 'You have complete editorial control over your biography. Review and edit every detail, add context, and ensure your authentic voice comes through. Our AI assists but you make all final decisions.' },
+  { id: '6', title: 'Can I share my story with others?', content: 'Stories can be exported as EPUB or PDF, or shared via a private link with controlled access levels. Keep it private for family or share publicly — you decide who reads your story.' },
+  { id: '7', title: 'How long does it take to create a memoir?', content: 'The time it takes to create a memoir depends on the complexity of your story and how much time you have to devote to it. On average, it can take a few weeks to a few months to complete a memoir. However, the time frame can vary depending on the scope of the story and the level of detail you want to include.' },
+  { id: '8', title: 'Can I update my story?', content: 'Yes! Your biography is a living document. Add new chapters, update existing content, or include new photos and memories anytime. Your story grows with you.' },
+  { id: '9', title: 'Can I use Iloomi for my family history research?', content: 'Absolutely! Iloomi is perfect for capturing family histories, preserving stories from multiple generations, and creating a comprehensive family archive that can be passed down.' },
+  { id: '10', title: 'Is Iloomi only for older people?', content: 'Not at all! Anyone can benefit from documenting their life story. Young adults, parents, professionals — everyone has experiences worth preserving for future generations.' },
+  { id: '11', title: 'Can I use Iloomi for my business or organization?', content: 'Yes! Iloomi can be used to create company histories, founder stories, organizational narratives, and more. Contact us for enterprise solutions.' },
+  { id: '12', title: 'How much does Iloomi cost?', content: 'Iloomi is free to use while we are in Beta. We expect to launch as a paid service with a basic free version after the beta period ends.' },
 ];
+
+function FAQItem({ title, content, isOpen, onToggle }: {
+  title: string;
+  content: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="border-b border-dark-green/10">
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between py-5 text-left group"
+      >
+        <span className={`text-base font-medium pr-4 transition-colors ${isOpen ? 'text-purple' : 'text-dark-green group-hover:text-purple'}`}>
+          {title}
+        </span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-dark-green/40 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 text-dark-green/60 leading-relaxed text-sm">
+              {content}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 interface FAQSectionProps {
   faqs?: FAQ[];
 }
 
 export function FAQSection({ faqs }: FAQSectionProps) {
-  // Use CMS data if available, otherwise use placeholders
-  const accordionItems = faqs && faqs.length > 0
-    ? faqs.slice(0, 6).map((faq) => ({
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const items = faqs && faqs.length > 0
+    ? faqs.map((faq) => ({
         id: faq._id,
         title: faq.question,
         content: <PortableText value={faq.answer} />,
@@ -100,66 +83,61 @@ export function FAQSection({ faqs }: FAQSectionProps) {
         content: faq.content,
       }));
 
-  return (
-    <section id="faq" className="py-24 bg-off-white">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-dark-green mb-6"
-          >
-            Frequently Asked <span className="text-marine-teal">Questions</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-dark-green/60"
-          >
-            Everything you need to know about ILOOMI.
-          </motion.p>
-        </div>
+  const midpoint = Math.ceil(items.length / 2);
+  const leftColumn = items.slice(0, midpoint);
+  const rightColumn = items.slice(midpoint);
 
+  return (
+    <section className="py-24 bg-white">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 md:p-8 shadow-sm"
+          className="text-center mb-12"
         >
-          <Accordion items={accordionItems} />
+          <h2 className="text-4xl md:text-5xl font-bold text-dark-green mb-6 font-serif">
+            Frequently Asked
+            <br />
+            Questions
+          </h2>
+          <Link
+            href="/faq"
+            className="inline-flex items-center gap-2 border border-dark-green/20 text-dark-green px-6 py-2.5 rounded-full text-sm font-medium hover:bg-dark-green hover:text-white transition-colors"
+          >
+            View All
+          </Link>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-center mt-10"
+          transition={{ delay: 0.1 }}
+          className="grid md:grid-cols-2 gap-x-16"
         >
-          <p className="text-dark-green/60 mb-4">Still have questions?</p>
-          <Link
-            href="/faq"
-            className="inline-flex items-center gap-2 text-purple font-medium hover:text-purple/80 transition-colors"
-          >
-            View All FAQs
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
+          <div>
+            {leftColumn.map((item) => (
+              <FAQItem
+                key={item.id}
+                title={item.title}
+                content={item.content}
+                isOpen={openId === item.id}
+                onToggle={() => setOpenId(openId === item.id ? null : item.id)}
               />
-            </svg>
-          </Link>
+            ))}
+          </div>
+          <div>
+            {rightColumn.map((item) => (
+              <FAQItem
+                key={item.id}
+                title={item.title}
+                content={item.content}
+                isOpen={openId === item.id}
+                onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

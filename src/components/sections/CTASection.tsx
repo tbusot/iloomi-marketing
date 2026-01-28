@@ -4,91 +4,124 @@ import { motion } from 'framer-motion';
 
 export function CTASection() {
   return (
-    <section id="download" className="py-24 bg-dark-green text-white">
+    <section id="download" className="py-24 bg-white">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Try Iloomi <span className="text-marine-teal">today</span>
-          </h2>
-          <p className="text-2xl text-white/90 mb-4 font-medium">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-purple mb-4">
+            Try Iloomi Today
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-dark-green mb-12 font-serif">
             Start your Story
-          </p>
-          <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            Iloomi is available on iOS. Android coming soon.
-          </p>
+          </h2>
+        </motion.div>
+
+        {/* Phone Mockups */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="flex justify-center items-end mb-12"
+        >
+          {/* Phone 1 — Story list */}
+          <div className="w-[200px] md:w-[240px] relative z-10">
+            <div className="aspect-[9/19] bg-dark-green rounded-3xl shadow-2xl overflow-hidden border-4 border-dark-green/80">
+              <div className="absolute inset-0 p-3">
+                <div className="flex justify-between items-center text-white/60 text-[8px] mb-3 px-1">
+                  <span>9:41</span>
+                  <div className="flex gap-1">
+                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
+                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
+                  </div>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-white text-sm font-medium">My Story</span>
+                  <span className="text-white text-lg">+</span>
+                </div>
+                <div className="flex gap-1 mb-3">
+                  {['All', 'Drafts', 'Published', 'Contributors'].map((tab, i) => (
+                    <span key={tab} className={`text-[7px] px-2 py-0.5 rounded-full ${i === 1 ? 'bg-marine-teal text-white' : 'text-white/50'}`}>
+                      {tab}
+                    </span>
+                  ))}
+                </div>
+                {/* Story cards */}
+                <div className="space-y-2">
+                  <div className="bg-white/10 rounded-lg p-2">
+                    <p className="text-[9px] text-white font-medium">Toddlers&apos; Imaginations Take Flight</p>
+                    <p className="text-[7px] text-white/50 mt-0.5">A story about early settlers sparks her toddlers&apos;...</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <span className="text-[6px] bg-marine-teal/30 text-marine-teal px-1.5 py-0.5 rounded-full">Draft</span>
+                    </div>
+                  </div>
+                  <div className="bg-white/10 rounded-lg p-2">
+                    <p className="text-[9px] text-white font-medium">Father and Son Hike in the Foothills</p>
+                    <p className="text-[7px] text-white/50 mt-0.5">Jake and Ryan embark on a hike to the foothills...</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <span className="text-[6px] bg-marine-teal/30 text-marine-teal px-1.5 py-0.5 rounded-full">Draft</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Phone 2 — Story detail */}
+          <div className="w-[200px] md:w-[240px] -ml-8 relative">
+            <div className="aspect-[9/19] bg-dark-green rounded-3xl shadow-2xl overflow-hidden border-4 border-dark-green/80">
+              <div className="absolute inset-0 p-3">
+                <div className="flex justify-between items-center text-white/60 text-[8px] mb-3 px-1">
+                  <span>9:41</span>
+                  <div className="flex gap-1">
+                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
+                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
+                  </div>
+                </div>
+                <div className="text-[8px] text-white/40 mb-2">← My Stories</div>
+                <div className="h-[40%] rounded-xl bg-gradient-to-b from-dark-green/60 to-dark-green/40 flex flex-col items-center justify-center p-3 mb-3">
+                  <p className="font-serif text-white text-sm italic text-center leading-tight">
+                    Toddlers&apos;
+                    <br />
+                    imaginations
+                    <br />
+                    take flight
+                  </p>
+                </div>
+                <p className="text-[7px] text-white/50 leading-relaxed">
+                  A story about early settlers sparks her toddlers&apos; imaginations, leading them on
+                  fantastical adventures in the wilderness.
+                </p>
+                <div className="flex items-center gap-1 mt-2">
+                  <div className="flex -space-x-1">
+                    <div className="w-4 h-4 rounded-full bg-marine-teal/30 border border-dark-green" />
+                    <div className="w-4 h-4 rounded-full bg-purple/30 border border-dark-green" />
+                  </div>
+                  <span className="text-[7px] text-white/40">by Helen, Carl, Kara...</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          transition={{ delay: 0.2 }}
         >
-          {/* App Store Button */}
+          <p className="text-dark-green/60 mb-8">
+            Iloomi is available on iOS. Android coming soon.
+          </p>
           <a
             href="#"
-            className="inline-flex items-center justify-center gap-3 bg-white text-dark-green px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 bg-purple text-white px-10 py-4 rounded-full font-medium text-lg hover:bg-purple/90 hover:scale-105 transition-all duration-200 shadow-lg shadow-purple/25"
           >
-            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-            </svg>
-            <div className="text-left">
-              <div className="text-xs opacity-70">Download on the</div>
-              <div className="text-lg font-semibold -mt-0.5">App Store</div>
-            </div>
+            Download App
           </a>
-
-          {/* Google Play Button - Coming Soon */}
-          <div className="inline-flex items-center justify-center gap-3 bg-white/20 text-white px-8 py-4 rounded-full font-medium cursor-not-allowed">
-            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-            </svg>
-            <div className="text-left">
-              <div className="text-xs opacity-70">Coming Soon to</div>
-              <div className="text-lg font-semibold -mt-0.5">Google Play</div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mt-12 flex flex-wrap justify-center gap-8 text-white/50 text-sm"
-        >
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>End-to-End Encrypted</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>Free During Beta</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-            </svg>
-            <span>Collaborate with Family</span>
-          </div>
         </motion.div>
       </div>
     </section>
