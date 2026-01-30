@@ -33,7 +33,7 @@ function FAQItem({ title, content, isOpen, onToggle }: {
         onClick={onToggle}
         className="w-full flex items-center justify-between py-5 text-left group"
       >
-        <span className={`text-base font-medium pr-4 transition-colors ${isOpen ? 'text-purple' : 'text-dark-green group-hover:text-purple'}`}>
+        <span className={`text-lg font-medium pr-4 transition-colors ${isOpen ? 'text-purple' : 'text-charcoal group-hover:text-purple'}`}>
           {title}
         </span>
         <svg
@@ -54,7 +54,7 @@ function FAQItem({ title, content, isOpen, onToggle }: {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="pb-5 text-dark-green/60 leading-relaxed text-sm">
+            <div className="pb-5 text-black leading-relaxed text-lg">
               {content}
             </div>
           </motion.div>
@@ -96,14 +96,14 @@ export function FAQSection({ faqs }: FAQSectionProps) {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-dark-green mb-6 font-serif">
+          <h2 className="section-heading-h2 mb-6">
             Frequently Asked
             <br />
             Questions
           </h2>
           <Link
             href="/faq"
-            className="inline-flex items-center gap-2 border border-dark-green/20 text-dark-green px-6 py-2.5 rounded-full text-sm font-medium hover:bg-dark-green hover:text-white transition-colors"
+              className="inline-flex items-center px-6 py-3 rounded-full border-2 border-dark-green text-dark-green bg-white font-medium hover:bg-dark-green hover:text-white transition-colors"
           >
             View All
           </Link>

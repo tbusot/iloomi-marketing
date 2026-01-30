@@ -147,6 +147,27 @@ _references/
 
 **Frames** When dropping .mov files in, export individual frames from the movie into a folder with the same name under the ./frames folder. Use these frames as a reference for animations.
 
+**Site/Page Assets**
+If the site assets are available, they will be under the `_references/screenshots/%page%/image_assets` folder. Consult the images in the `./frames` folder and find the corresponding `image_assets` file to place into the page.
+
+**Bug Screenshots**
+Bug screenshots are placed in `_references/screenshots/%page%/bug-%section%/` (e.g., `homepage/bug-hero/`). Each bug folder contains:
+- `%bug%-good.png` — the desired/correct appearance of the specific section
+- `%bug%-%desc%.png` — the current buggy appearance
+- `%page%-full-good.jpg` — **full-page reference** showing the entire page at correct scale and layout. Always consult this file to understand how the section fits within the overall page: what elements appear above and below, how much vertical space the section occupies, and whether elements (e.g., device collages, images) extend beyond the section boundary into adjacent areas.
+
+Compare the two screenshots to identify differences in size, color, text, layout, etc. Note that text, labels, or other content baked into the "good" image should not be duplicated as HTML overlay text. Fix only the specific issue shown — no other changes.
+
+Bug screenshots may include the outer browser frame/chrome to convey the proper scale of elements relative to the full viewport. Use this framing to judge proportions, full-bleed vs. contained layouts, and how much of the viewport a section occupies — do not treat the browser chrome itself as part of the design.
+
+**Animation Frames**
+When a `frames/` folder exists under `_references/screenshots/%page%/`, it contains exported frames from a screen recording (`.mov`). The subfolder is named after the source movie file. Review the frame sequence to understand:
+- Entrance animations (elements sliding/fading in)
+- Scroll-driven transitions (elements fading, scaling, or translating on scroll)
+- The order and timing of animated elements
+
+Use these frames as the definitive reference for which elements animate, their direction of motion, and their visual state at different scroll positions. Do not remove animated elements when fixing other issues — preserve all animations visible in the frames.
+
 ---
 
 ## Build & Dev Commands

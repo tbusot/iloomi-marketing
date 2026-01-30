@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { href: '/#features', label: 'Features' },
-  { href: '/#how-it-works', label: 'How It Works' },
+  { href: '/#features', label: 'Product' },
+  { href: '/#how-it-works', label: 'How it Works' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
 ];
@@ -17,6 +18,9 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
+
+  // Homepage has a dark hero, so the nav should be white when not scrolled
+  const isDarkHero = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,36 +48,49 @@ export function Header() {
         isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between">
+      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between relative">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-dark-green font-serif">
-            iloomi
-          </span>
+          <Image
+            src="/images/iloomi-logo.svg"
+            alt="iloomi"
+            width={100}
+            height={29}
+            className={`transition-all duration-300 ${
+              isScrolled || !isDarkHero ? 'brightness-0' : 'brightness-0 invert'
+            }`}
+            priority
+          />
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Navigation — centered */}
+        <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-dark-green hover:text-purple transition-colors font-medium"
+              className={`hover:text-purple transition-colors font-medium ${
+                isScrolled || !isDarkHero ? 'text-dark-green' : 'text-white'
+              }`}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/#download"
-            className="bg-purple text-white px-5 py-2.5 rounded-full font-medium hover:bg-purple/90 transition-colors"
-          >
-            Download App
-          </Link>
         </div>
+
+        {/* Download button — right aligned */}
+        <Link
+          href="/#download"
+          className="hidden md:inline-flex bg-purple text-white px-5 py-2.5 rounded-full font-medium hover:bg-purple/90 transition-colors"
+        >
+          Download
+        </Link>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-dark-green"
+          className={`md:hidden p-2 transition-colors duration-300 ${
+            isScrolled || !isDarkHero ? 'text-dark-green' : 'text-white'
+          }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >

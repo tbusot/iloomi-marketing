@@ -1,6 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,135 +19,121 @@ const staggerContainer = {
 };
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const deviceRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Track the device collage entering the viewport
+  const { scrollYProgress: deviceProgress } = useScroll({
+    target: deviceRef,
+    offset: ['start end', 'end end'],
+  });
+
+  // Hero text fades out and drifts upward as the user scrolls
+  const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
+
+  // Device collage grows from 85% to 100% as it scrolls into view
+  const deviceScale = useTransform(deviceProgress, [0, 1], [0.85, 1]);
+
   return (
-    <section className="bg-off-white pt-28 pb-16 overflow-hidden">
-      <div className="mx-auto max-w-5xl px-6">
-        {/* Centered Text */}
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
-          className="text-center"
-        >
-          <motion.p
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-            className="text-sm font-semibold tracking-[0.2em] uppercase text-dark-green/70 mb-6"
-          >
-            The Collaborative Biographer
-          </motion.p>
+    <section ref={sectionRef} className="relative bg-white">
+      {/* Dark background — photo album image + warm charcoal overlay.
+          Extends behind the device collage area with a gradient fade to off-white. */}
+      <div className="absolute inset-x-0 top-0 bottom-[15%] overflow-hidden">
+        <Image
+          src="/images/photo-album.webp"
+          alt=""
+          fill
+          className="object-cover saturate-[70%]"
+          priority
+        />
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(49, 47, 39, 0.7)', filter: 'saturate(200%)' }}
+        />
+        {/* Smooth gradient fade to off-white at the bottom edge */}
+        {/* <div
+          className="absolute inset-x-0 bottom-0 h-40"
+          style={{ background: 'linear-gradient(to bottom, transparent, #F5F3EF)' }}
+        /> */}
+      </div>
 
-          <motion.h1
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-dark-green leading-tight mb-8 font-serif"
-          >
-            Stories told together.
-            <br />
-            Memories cherished forever.
-          </motion.h1>
-
-          <motion.p
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-            className="text-lg md:text-xl text-dark-green/70 mb-10 max-w-2xl mx-auto"
-          >
-            Iloomi helps you collaborate with friends and loved ones to tell
-            your story in a way that is both authentic and meaningful.
-          </motion.p>
-
+      {/* Hero text content — fills the viewport, vertically centered */}
+      <div className="relative z-10 mx-auto max-w-5xl px-6 min-h-[100svh] flex flex-col items-center justify-center pt-16">
+        <motion.div style={{ opacity: textOpacity, y: textY }}>
           <motion.div
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+            className="text-center"
           >
-            <a
-              href="#download"
-              className="inline-flex items-center gap-2 bg-dark-green text-white px-8 py-4 rounded-full font-medium hover:bg-dark-green/90 hover:scale-105 transition-all duration-200 text-lg"
+            <motion.p
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+              className="text-xs font-semibold tracking-[0.2em] uppercase text-white/70 mb-6"
             >
-              Download App
-            </a>
+              The Collaborative Biographer
+            </motion.p>
+
+            <motion.h1
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 font-serif"
+            >
+              Stories told together.
+              <br />
+              Memories cherished forever.
+            </motion.h1>
+
+            <motion.p
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+              className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto"
+            >
+              Iloomi helps you collaborate with friends and loved ones to tell
+              your story in a way that is both authentic and meaningful.
+            </motion.p>
+
+            <motion.div
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+            >
+              <a
+                href="#download"
+                className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-200 text-xl"
+                style={{ backgroundColor: 'rgba(22, 36, 37, 0.5)' }}
+              >
+                Download App
+              </a>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Device Collage */}
+      {/* Device Collage — Key Visual (iPad + iPhone) */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-        className="mx-auto max-w-5xl px-6 mt-16"
+        ref={deviceRef}
+        style={{ scale: deviceScale }}
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        className="relative z-10 mx-auto max-w-6xl px-6 pb-16 origin-top"
       >
-        <div className="relative flex items-end justify-center gap-4">
-          {/* iPad / Tablet mockup */}
-          <div className="relative w-[55%] max-w-[500px]">
-            <div className="aspect-[4/3] bg-white rounded-2xl shadow-2xl border border-dark-green/10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-off-white to-white p-6">
-                {/* App UI mockup */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="text-xl font-bold text-dark-green font-serif">iloomi</div>
-                </div>
-                <div className="flex gap-4 mb-4">
-                  {['Story', 'Topic', 'Media', 'Invite', 'Edit'].map((tab) => (
-                    <div key={tab} className="flex flex-col items-center gap-1">
-                      <div className="w-8 h-8 rounded-full bg-marine-teal/20 flex items-center justify-center">
-                        <div className="w-4 h-4 rounded-full bg-marine-teal/40" />
-                      </div>
-                      <span className="text-[10px] text-dark-green/60">{tab}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="bg-marine-teal/10 rounded-xl p-4 mb-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-full bg-dark-green/20" />
-                    <span className="text-sm font-medium text-dark-green">Start a Story</span>
-                  </div>
-                  <p className="text-xs text-dark-green/50">
-                    Have a special story to share? You can even work with friends and family to draft it.
-                  </p>
-                </div>
-                <div className="text-[10px] tracking-widest text-dark-green/40 uppercase mb-2">Early Childhood</div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-serif font-bold text-dark-green">The Bald Eagle Companion</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Phone mockup */}
-          <div className="relative w-[28%] max-w-[220px] -ml-12 z-10">
-            <div className="aspect-[9/18] bg-dark-green rounded-3xl shadow-2xl overflow-hidden border-4 border-dark-green">
-              <div className="absolute inset-0 p-3">
-                {/* Phone status bar */}
-                <div className="flex justify-between items-center text-white/60 text-[8px] mb-4 px-1">
-                  <span>9:41</span>
-                  <div className="flex gap-1">
-                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
-                    <div className="w-3 h-2 bg-white/40 rounded-sm" />
-                  </div>
-                </div>
-                {/* Book cover content */}
-                <div className="relative h-[60%] rounded-xl overflow-hidden bg-gradient-to-b from-dark-green/60 to-dark-green/90 flex flex-col items-center justify-center p-3">
-                  <div className="absolute inset-0 bg-[url('/globe.svg')] opacity-5 bg-cover" />
-                  <p className="text-[8px] text-white/50 tracking-widest uppercase mb-1">Chapter 7</p>
-                  <p className="text-center font-serif text-white text-sm leading-tight italic">
-                    The Bald Eagle
-                    <br />
-                    Companion
-                  </p>
-                </div>
-                {/* Author info */}
-                <div className="mt-3 px-1">
-                  <div className="flex items-center gap-1 mb-1">
-                    <div className="w-4 h-4 rounded-full bg-marine-teal/30" />
-                    <span className="text-[8px] text-white/60">by John</span>
-                  </div>
-                  <p className="text-[7px] text-white/40 leading-relaxed">
-                    My son was only a few months old when I decided to take him on his first hike...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="relative w-full flex justify-center">
+          <Image
+            src="/images/iloomi-kv.webp"
+            alt="Iloomi app shown on iPad and iPhone — collaborative biography interface"
+            width={1200}
+            height={800}
+            className="w-full max-w-[1000px] h-auto"
+            priority
+          />
         </div>
       </motion.div>
     </section>
