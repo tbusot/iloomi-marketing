@@ -10,7 +10,14 @@ export const blogPostsQuery = groq`
     featuredImage,
     readingTime,
     publishedAt,
-    author
+    author,
+    tags,
+    isFeatured,
+    topic,
+    seoTitle,
+    seoDescription,
+    photoCredit,
+    photoCreditLink
   }
 `;
 
@@ -24,7 +31,18 @@ export const blogPostBySlugQuery = groq`
     content,
     readingTime,
     publishedAt,
-    author
+    author,
+    tags,
+    isFeatured,
+    topic,
+    seoTitle,
+    seoDescription,
+    photoCredit,
+    photoCreditLink,
+    quote,
+    quoteAuthor,
+    summary,
+    keyTakeaways
   }
 `;
 
@@ -37,7 +55,27 @@ export const latestBlogPostsQuery = groq`
     featuredImage,
     readingTime,
     publishedAt,
-    author
+    author,
+    tags,
+    isFeatured,
+    topic
+  }
+`;
+
+export const featuredBlogPostQuery = groq`
+  *[_type == "blogPost" && isFeatured == true] | order(publishedAt desc)[0] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    featuredImage,
+    readingTime,
+    publishedAt,
+    author,
+    tags,
+    topic,
+    photoCredit,
+    photoCreditLink
   }
 `;
 

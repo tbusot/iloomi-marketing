@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PortableText } from '@portabletext/react';
 import { client } from '@/lib/sanity/client';
+import { urlFor } from '@/lib/sanity/image';
 import { blogPostBySlugQuery, blogPostsQuery } from '@/lib/sanity/queries';
 import type { BlogPost } from '@/types';
 
@@ -161,8 +163,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${post.title} | Iloomi Blog`,
-    description: post.excerpt,
+    title: post.seoTitle || `${post.title} | Iloomi Blog`,
+    description: post.seoDescription || post.excerpt,
   };
 }
 
@@ -263,27 +265,40 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
         </header>
 
-        {/* Featured image placeholder */}
-        <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-purple/10 to-marine-teal/10 mb-12 flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-16 h-16 mx-auto mb-3 bg-purple/20 rounded-full flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-purple"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
+        {/* Featured image */}
+        {post.featuredImage ? (
+          <figure className="mb-12">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden">
+              <Image
+                src={urlFor(post.featuredImage).width(1200).quality(85).url()}
+                alt={post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
             </div>
-            <p className="text-dark-green/30 text-sm">Featured image placeholder</p>
-          </div>
-        </div>
+            {post.photoCredit && (
+              <figcaption className="mt-2 text-sm text-dark-green/40 text-right">
+                Photo by{' '}
+                {post.photoCreditLink ? (
+                  <a
+                    href={post.photoCreditLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-dark-green/60 transition-colors"
+                  >
+                    {post.photoCredit}
+                  </a>
+                ) : (
+                  post.photoCredit
+                )}
+              </figcaption>
+            )}
+          </figure>
+        ) : (
+          <div className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-purple/10 to-marine-teal/10 mb-12" />
+        )}
 
         {/* Content */}
         <div className="prose prose-lg max-w-none">
@@ -291,6 +306,36 @@ export default async function BlogPostPage({ params }: PageProps) {
             <PortableText value={post.content} components={portableTextComponents} />
           )}
         </div>
+
+        {/* Quote */}
+        {post.quote && (
+          <div className="my-16 text-center">
+            <p className="rich-text-quote">&ldquo;{post.quote}&rdquo;</p>
+            {post.quoteAuthor && (
+              <p className="mt-4 text-dark-green/60 font-medium">{post.quoteAuthor}</p>
+            )}
+          </div>
+        )}
+
+        {/* Summary */}
+        {post.summary && post.summary.length > 0 && (
+          <div className="mt-12">
+            <p className="section-eyebrow-md mb-4">Summary</p>
+            <div className="prose prose-lg max-w-none">
+              <PortableText value={post.summary} components={portableTextComponents} />
+            </div>
+          </div>
+        )}
+
+        {/* Key Takeaways */}
+        {post.keyTakeaways && post.keyTakeaways.length > 0 && (
+          <div className="mt-12">
+            <p className="section-eyebrow-md mb-4">Key Takeaways</p>
+            <div className="prose prose-lg max-w-none">
+              <PortableText value={post.keyTakeaways} components={portableTextComponents} />
+            </div>
+          </div>
+        )}
 
         {/* Share & Navigation */}
         <footer className="mt-16 pt-8 border-t border-dark-green/10">

@@ -26,6 +26,17 @@ export interface BlogPost {
   readingTime?: number;
   publishedAt?: string;
   author?: string;
+  tags?: string[];
+  isFeatured?: boolean;
+  topic?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  photoCredit?: string;
+  photoCreditLink?: string;
+  quote?: string;
+  quoteAuthor?: string;
+  summary?: PortableTextBlock[];
+  keyTakeaways?: PortableTextBlock[];
 }
 
 export interface FAQCategory {
