@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { client } from '@/lib/sanity/client';
 import { urlFor } from '@/lib/sanity/image';
-import { blogPostsQuery } from '@/lib/sanity/queries';
+import { blogPostsQuery, blogPostsByTopicQuery, blogTopicsQuery } from '@/lib/sanity/queries';
 import type { BlogPost } from '@/types';
 
 export const metadata: Metadata = {
@@ -160,27 +160,36 @@ const placeholderPosts: (BlogPost & { image: string; category: string })[] = [
   },
 ];
 
-const categories = [
-  'All',
-  'How-to Guides',
-  'Memoirs',
-  'Collaboration',
-  'Life Stories',
-  'Preservation',
-  'Miscellaneous',
-];
-
-async function getBlogPosts(): Promise<BlogPost[]> {
+async function getTopics(): Promise<string[]> {
   try {
-    const posts = await client.fetch(blogPostsQuery);
+    const topics: string[] = await client.fetch(blogTopicsQuery);
+    return topics?.length > 0 ? topics.sort() : [];
+  } catch {
+    return [];
+  }
+}
+
+async function getBlogPosts(topic?: string): Promise<BlogPost[]> {
+  try {
+    const posts = topic
+      ? await client.fetch(blogPostsByTopicQuery, { topic })
+      : await client.fetch(blogPostsQuery);
     return posts?.length > 0 ? posts : placeholderPosts;
   } catch {
     return placeholderPosts;
   }
 }
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts();
+interface PageProps {
+  searchParams: Promise<{ topic?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: PageProps) {
+  const { topic: activeTopic } = await searchParams;
+  const [topics, posts] = await Promise.all([
+    getTopics(),
+    getBlogPosts(activeTopic),
+  ]);
   const [featuredPost, ...gridPosts] = posts;
 
   return (
@@ -234,17 +243,28 @@ export default async function BlogPage() {
 
         {/* Category Filter Tabs */}
         <div className="flex flex-wrap gap-2 mb-12">
-          {categories.map((cat, i) => (
-            <button
-              key={cat}
+          <Link
+            href="/blog"
+            className={`px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase transition-colors ${
+              !activeTopic
+                ? 'bg-dark-green text-white'
+                : 'bg-off-white text-dark-green/60 hover:bg-dark-green/10'
+            }`}
+          >
+            All
+          </Link>
+          {topics.map((topic) => (
+            <Link
+              key={topic}
+              href={`/blog?topic=${encodeURIComponent(topic)}`}
               className={`px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase transition-colors ${
-                i === 0
+                activeTopic === topic
                   ? 'bg-dark-green text-white'
                   : 'bg-off-white text-dark-green/60 hover:bg-dark-green/10'
               }`}
             >
-              {cat}
-            </button>
+              {topic}
+            </Link>
           ))}
         </div>
 

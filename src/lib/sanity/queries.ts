@@ -79,6 +79,30 @@ export const featuredBlogPostQuery = groq`
   }
 `;
 
+export const blogTopicsQuery = groq`
+  array::unique(*[_type == "blogPost" && defined(topic)].topic)
+`;
+
+export const blogPostsByTopicQuery = groq`
+  *[_type == "blogPost" && topic == $topic] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    featuredImage,
+    readingTime,
+    publishedAt,
+    author,
+    tags,
+    isFeatured,
+    topic,
+    seoTitle,
+    seoDescription,
+    photoCredit,
+    photoCreditLink
+  }
+`;
+
 // FAQ queries
 export const faqsQuery = groq`
   *[_type == "faq"] | order(category->order asc, order asc) {
