@@ -133,16 +133,6 @@ export function HowItWorks() {
         </motion.div>
       </div>
 
-      <style jsx global>{`
-        .how-it-works-swiper .swiper-pagination-bullet {
-          background: #0D4D40;
-          opacity: 0.3;
-        }
-        .how-it-works-swiper .swiper-pagination-bullet-active {
-          opacity: 1;
-          background: #0D4D40;
-        }
-      `}</style>
     </section>
   );
 }

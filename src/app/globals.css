@@ -199,6 +199,23 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
+/* How it Works Swiper overrides */
+.how-it-works-swiper .swiper-pagination {
+  position: relative !important;
+  bottom: auto !important;
+  margin-top: 24px;
+}
+
+.how-it-works-swiper .swiper-pagination-bullet {
+  background: #0D4D40 !important;
+  opacity: 0.3;
+}
+
+.how-it-works-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #0D4D40 !important;
+}
+
 /* Blog preview Swiper overrides */
 .blog-preview-swiper .swiper-button-next,
 .blog-preview-swiper .swiper-button-prev {

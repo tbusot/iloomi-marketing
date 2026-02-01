@@ -8,8 +8,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Brand & Mission */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-3xl font-bold font-serif text-dark-green">iloomi</span>
+            <Link href="/" className="inline-block mb-4 text-dark-green">
+              <Image
+                src="/images/iloomi-logo.svg"
+                alt="Iloomi"
+                width={140}
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-dark-green/70 mb-6 max-w-sm leading-relaxed">
               We embrace the belief that the most extraordinary tales lie in
