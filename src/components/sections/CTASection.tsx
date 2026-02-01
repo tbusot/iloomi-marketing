@@ -49,7 +49,7 @@ export function CTASection() {
             Iloomi is available on Web, iOS, and Android.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="#" className="inline-block">
+            <a href="https://apps.apple.com/us/app/iloomi/id6467228839" target="_blank" rel="noopener noreferrer" className="inline-block">
               <Image
                 src="/images/app-store-button.svg"
                 alt="Download on the App Store"
@@ -58,7 +58,7 @@ export function CTASection() {
                 className="h-[48px] w-auto"
               />
             </a>
-            <a href="#" className="inline-block">
+            <a href="https://play.google.com/store/apps/details?id=com.iloomi.app.prod" target="_blank" rel="noopener noreferrer" className="inline-block">
               <Image
                 src="/images/google-play-button.svg"
                 alt="Get it on Google Play"

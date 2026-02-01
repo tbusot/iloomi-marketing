@@ -103,7 +103,7 @@ export function Footer() {
               Download App
             </h3>
             <div className="flex flex-col gap-3">
-              <a href="#" className="inline-block w-fit">
+              <a href="https://apps.apple.com/us/app/iloomi/id6467228839" target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
                 <Image
                   src="/images/app-store-button.svg"
                   alt="Download on the App Store"
@@ -112,7 +112,7 @@ export function Footer() {
                   className="h-[42px] w-auto"
                 />
               </a>
-              <a href="#" className="inline-block w-fit">
+              <a href="https://play.google.com/store/apps/details?id=com.iloomi.app.prod" target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
                 <Image
                   src="/images/google-play-button.svg"
                   alt="Get it on Google Play"
