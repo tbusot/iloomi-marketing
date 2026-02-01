@@ -102,7 +102,7 @@ export function HowItWorks() {
               1024: { slidesPerView: 3.5 },
               1280: { slidesPerView: 4 },
             }}
-            className="how-it-works-swiper pb-14"
+            className="how-it-works-swiper"
           >
             {steps.map((step, i) => (
               <SwiperSlide key={i}>
