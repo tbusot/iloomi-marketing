@@ -47,7 +47,7 @@ export const blogPostBySlugQuery = groq`
 `;
 
 export const latestBlogPostsQuery = groq`
-  *[_type == "blogPost"] | order(publishedAt desc)[0...3] {
+  *[_type == "blogPost"] | order(publishedAt desc)[0...5] {
     _id,
     title,
     slug,

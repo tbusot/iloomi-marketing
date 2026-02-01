@@ -8,6 +8,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { urlFor } from '@/lib/sanity/image';
 import type { BlogPost } from '@/types';
 
 // Placeholder blog posts for initial render - matches iloomi.com articles
@@ -172,10 +173,12 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
             }}
             className="blog-preview-swiper"
           >
-            {displayPosts.map((post, index) => {
-              const blogImage = 'image' in post
-                ? (post as (typeof placeholderPosts)[number]).image
-                : `/images/blog-0${(index % 8) + 1}.jpg`;
+            {displayPosts.map((post) => {
+              const blogImage = post.featuredImage
+                ? urlFor(post.featuredImage).width(800).quality(80).url()
+                : 'image' in post
+                  ? (post as (typeof placeholderPosts)[number]).image
+                  : null;
 
               return (
                 <SwiperSlide key={post._id}>
@@ -183,13 +186,17 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
                     <Link href={`/blog/${post.slug.current}`} className="block h-full">
                       {/* Blog image */}
                       <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-6 relative">
-                        <Image
-                          src={blogImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
+                        {blogImage ? (
+                          <Image
+                            src={blogImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 bg-gradient-to-br from-purple/10 to-marine-teal/10" />
+                        )}
                       </div>
 
                       <div className="flex items-center gap-3 text-sm text-dark-green/50 mb-3">
