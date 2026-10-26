@@ -2,6 +2,7 @@ import { client } from '@/lib/sanity/client';
 import { latestBlogPostsQuery, faqsQuery } from '@/lib/sanity/queries';
 import {
   Hero,
+  VideoFeatures,
   ProductFeatures,
   HowItWorks,
   BlogPreview,
@@ -28,6 +29,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <VideoFeatures />
       <ProductFeatures />
       <HowItWorks />
       <BlogPreview posts={blogPosts} />

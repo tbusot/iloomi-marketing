@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { StoryVideo } from '@/components/ui/StoryVideo';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -20,31 +21,21 @@ const staggerContainer = {
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const deviceRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  // Track the device collage entering the viewport
-  const { scrollYProgress: deviceProgress } = useScroll({
-    target: deviceRef,
-    offset: ['start end', 'end end'],
-  });
-
   // Hero text fades out and drifts upward as the user scrolls
   const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
 
-  // Device collage grows from 85% to 100% as it scrolls into view
-  const deviceScale = useTransform(deviceProgress, [0, 1], [0.85, 1]);
-
   return (
     <section ref={sectionRef} className="relative bg-white">
       {/* Dark background — photo album image + warm charcoal overlay.
-          Extends behind the device collage area with a gradient fade to off-white. */}
-      <div className="absolute inset-x-0 top-0 bottom-[15%] overflow-hidden">
+          Covers the whole hero, behind the copy and the video. */}
+      <div className="absolute inset-0 overflow-hidden">
         <Image
           src="/images/photo-album.webp"
           alt=""
@@ -63,14 +54,14 @@ export function Hero() {
         /> */}
       </div>
 
-      {/* Hero text content — fills the viewport, vertically centered */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 min-h-[100svh] flex flex-col items-center justify-center pt-16">
+      {/* Copy on the left, the main product video on the right; stacked on mobile. */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-20 lg:min-h-[100svh] lg:pt-24 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-12 lg:gap-20 items-center">
         <motion.div style={{ opacity: textOpacity, y: textY }}>
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="text-center"
+            className="text-center lg:text-left"
           >
             <motion.p
               variants={fadeInUp}
@@ -93,10 +84,10 @@ export function Hero() {
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.5 }}
-              className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto"
+              className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto lg:mx-0"
             >
-              Iloomi helps you collaborate with friends and loved ones to tell
-              your story in a way that is both authentic and meaningful.
+              Iloomi asks the questions no one ever thought to ask, then writes the
+              story in your words. Your family reads it, and adds what they remember.
             </motion.p>
 
             <motion.div
@@ -113,29 +104,19 @@ export function Hero() {
             </motion.div>
           </motion.div>
         </motion.div>
-      </div>
 
-      {/* Device Collage — Key Visual (iPad + iPhone) */}
-      <motion.div
-        ref={deviceRef}
-        style={{ scale: deviceScale }}
-        initial={{ opacity: 0, y: 80 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
-        className="relative z-10 mx-auto max-w-6xl px-6 pb-16 origin-top"
-      >
-        <div className="relative w-full flex justify-center">
-          <Image
-            src="/images/iloomi-kv.webp"
-            alt="Iloomi app shown on iPad and iPhone — collaborative biography interface"
-            width={1200}
-            height={800}
-            className="w-full max-w-[1000px] h-auto"
-            priority
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease: 'easeOut', delay: 0.3 }}
+          className="mx-auto w-full max-w-[300px] lg:max-w-[340px]"
+        >
+          <StoryVideo
+            name="iloomi-story"
+            label="Iloomi in action: a conversation with Iloomi becomes a written story your family can read."
           />
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
