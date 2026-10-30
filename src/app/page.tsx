@@ -1,40 +1,21 @@
-import { client } from '@/lib/sanity/client';
-import { latestBlogPostsQuery, faqsQuery } from '@/lib/sanity/queries';
 import {
   Hero,
-  VideoFeatures,
-  ProductFeatures,
-  HowItWorks,
-  BlogPreview,
-  FAQSection,
-  CTASection,
+  WhyNow,
+  BackAndForth,
+  FeatureLoops,
+  StorySample,
+  StartStory,
 } from '@/components/sections';
-import type { BlogPost, FAQ } from '@/types';
 
-async function getHomePageData() {
-  try {
-    const [blogPosts, faqs] = await Promise.all([
-      client.fetch<BlogPost[]>(latestBlogPostsQuery),
-      client.fetch<FAQ[]>(faqsQuery),
-    ]);
-    return { blogPosts, faqs };
-  } catch {
-    return { blogPosts: undefined, faqs: undefined };
-  }
-}
-
-export default async function Home() {
-  const { blogPosts, faqs } = await getHomePageData();
-
+export default function Home() {
   return (
     <>
       <Hero />
-      <VideoFeatures />
-      <ProductFeatures />
-      <HowItWorks />
-      <BlogPreview posts={blogPosts} />
-      <FAQSection faqs={faqs} />
-      <CTASection />
+      <WhyNow />
+      <BackAndForth />
+      <FeatureLoops />
+      <StorySample />
+      <StartStory />
     </>
   );
 }

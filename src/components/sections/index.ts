@@ -1,7 +1,8 @@
 export { Hero } from './Hero';
-export { ProductFeatures } from './ProductFeatures';
-export { VideoFeatures } from './VideoFeatures';
-export { HowItWorks } from './HowItWorks';
+export { WhyNow } from './WhyNow';
+export { BackAndForth } from './BackAndForth';
+export { FeatureLoops } from './FeatureLoops';
+export { StorySample } from './StorySample';
+export { StartStory } from './StartStory';
 export { BlogPreview } from './BlogPreview';
 export { FAQSection } from './FAQSection';
-export { CTASection } from './CTASection';

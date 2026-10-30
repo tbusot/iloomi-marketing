@@ -32,18 +32,18 @@ export function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/#features" className="text-dark-green/70 hover:text-dark-green transition-colors">
-                  Product
+                <Link href="/#why-now" className="text-dark-green/70 hover:text-dark-green transition-colors">
+                  Why now
                 </Link>
               </li>
               <li>
                 <Link href="/#how-it-works" className="text-dark-green/70 hover:text-dark-green transition-colors">
-                  How it Works
+                  How it works
                 </Link>
               </li>
               <li>
-                <Link href="/#download" className="text-dark-green/70 hover:text-dark-green transition-colors">
-                  Download
+                <Link href="/#begin" className="text-dark-green/70 hover:text-dark-green transition-colors">
+                  Start a story
                 </Link>
               </li>
             </ul>
@@ -64,14 +64,6 @@ export function Footer() {
                 <Link href="/faq" className="text-dark-green/70 hover:text-dark-green transition-colors">
                   Frequently Asked Questions
                 </Link>
-              </li>
-              <li>
-                <span className="text-dark-green/70">
-                  Careers{' '}
-                  <span className="inline-block text-[10px] bg-marine-teal text-white px-2 py-0.5 rounded-full ml-1">
-                    Coming Soon
-                  </span>
-                </span>
               </li>
             </ul>
           </div>

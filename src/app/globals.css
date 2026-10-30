@@ -9,6 +9,14 @@
   --white: #FFFFFF;
   --charcoal: #515151;
 
+  /* Book palette for the home page: warm paper, ink and umber */
+  --ink: #1d1a17;
+  --umber: #241c16;
+  --muted: #5a5148;
+  --taupe: #8a7d6d;
+  --sand: #E9C9A0;
+  --mint: #E3F1EC;
+
   /* Semantic colors */
   --background: var(--off-white);
   --foreground: var(--dark-green);
@@ -26,8 +34,15 @@
   --color-marine-teal: var(--marine-teal);
   --color-off-white: var(--off-white);
   --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --color-umber: var(--umber);
+  --color-muted: var(--muted);
+  --color-taupe: var(--taupe);
+  --color-sand: var(--sand);
+  --color-mint: var(--mint);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --font-book: var(--font-source-serif);
 }
 
 /* Smooth scrolling */
@@ -58,10 +73,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
+/* In the base layer so utilities like font-serif can override it */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* Tailwind v4 gives buttons the default arrow; use the hand like links do. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Entrance that runs without JavaScript, so the hero is never hidden */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-out both;
 }
 
 /* Focus styles for accessibility */

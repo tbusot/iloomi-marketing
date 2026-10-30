@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { href: '/#features', label: 'Product' },
-  { href: '/#how-it-works', label: 'How it Works' },
+  { href: '/#why-now', label: 'Why now' },
+  { href: '/#how-it-works', label: 'How it works' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
 ];
@@ -78,12 +78,16 @@ export function Header() {
           ))}
         </div>
 
-        {/* Download button — right aligned */}
+        {/* Start a story — right aligned; outlined over the dark hero */}
         <Link
-          href="/#download"
-          className="hidden md:inline-flex bg-purple text-white px-5 py-2.5 rounded-full font-medium hover:bg-purple/90 transition-colors"
+          href="/#begin"
+          className={`hidden md:inline-flex px-5 py-2.5 rounded-full font-semibold transition-colors ${
+            isScrolled || !isDarkHero
+              ? 'bg-dark-green text-white hover:bg-dark-green/90'
+              : 'border border-white/40 text-white hover:bg-white/10'
+          }`}
         >
-          Download
+          Start a story
         </Link>
 
         {/* Mobile Menu Button */}
@@ -140,11 +144,11 @@ export function Header() {
                 </Link>
               ))}
               <Link
-                href="/#download"
-                className="block bg-purple text-white px-5 py-3 rounded-full font-medium hover:bg-purple/90 transition-colors text-center"
+                href="/#begin"
+                className="block bg-dark-green text-white px-5 py-3 rounded-full font-medium hover:bg-dark-green/90 transition-colors text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Download App
+                Start a story
               </Link>
             </div>
           </motion.div>
@@ -153,7 +157,7 @@ export function Header() {
 
       {/* Scroll Progress Bar */}
       <motion.div
-        className="absolute bottom-0 left-0 h-0.5 bg-purple"
+        className="absolute bottom-0 left-0 h-0.5 bg-dark-green"
         style={{ width: `${scrollProgress}%` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: isScrolled ? 1 : 0 }}

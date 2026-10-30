@@ -43,3 +43,9 @@ next-env.d.ts
 
 # reference assets (screenshots, raw images for dev)
 /_references
+
+# firebase hosting cache (media site)
+.firebase/
+
+# media site: videos live on Firebase (media.iloomi.com), masters in iloomi_video
+/media/public/videos/*.mp4
