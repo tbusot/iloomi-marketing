@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { WEB_APP_LOGIN_URL } from '@/components/ui/StoreBadges';
 
 const navLinks = [
   { href: '/#why-now', label: 'Why now' },
@@ -78,17 +79,27 @@ export function Header() {
           ))}
         </div>
 
-        {/* Start a story — right aligned; outlined over the dark hero */}
-        <Link
-          href="/#begin"
-          className={`hidden md:inline-flex px-5 py-2.5 rounded-full font-semibold transition-colors ${
-            isScrolled || !isDarkHero
-              ? 'bg-dark-green text-white hover:bg-dark-green/90'
-              : 'border border-white/40 text-white hover:bg-white/10'
-          }`}
-        >
-          Start a story
-        </Link>
+        {/* Log in and Start a story — right aligned; outlined over the dark hero */}
+        <div className="hidden md:flex items-center gap-6">
+          <a
+            href={WEB_APP_LOGIN_URL}
+            className={`hover:text-purple transition-colors font-medium ${
+              isScrolled || !isDarkHero ? 'text-dark-green' : 'text-white'
+            }`}
+          >
+            Log in
+          </a>
+          <Link
+            href="/#begin"
+            className={`inline-flex px-5 py-2.5 rounded-full font-semibold transition-colors ${
+              isScrolled || !isDarkHero
+                ? 'bg-dark-green text-white hover:bg-dark-green/90'
+                : 'border border-white/40 text-white hover:bg-white/10'
+            }`}
+          >
+            Start a story
+          </Link>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -143,6 +154,12 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href={WEB_APP_LOGIN_URL}
+                className="block text-dark-green hover:text-purple transition-colors font-medium py-2"
+              >
+                Log in
+              </a>
               <Link
                 href="/#begin"
                 className="block bg-dark-green text-white px-5 py-3 rounded-full font-medium hover:bg-dark-green/90 transition-colors text-center"
