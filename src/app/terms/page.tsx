@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { LegalPage } from '@/components/layout/LegalPage';
+import { COMPANY_MAILING_ADDRESS } from '@/lib/company';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Iloomi',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <LegalPage title="Terms & Conditions" lastModified="October 30, 2026">
+    <LegalPage title="Terms & Conditions" lastModified="November 2, 2026">
       <p>
         Please read our terms carefully. It is important to understand the steps that we take to
         secure your information and the people that you care about. Please direct questions to
@@ -114,6 +115,12 @@ export default function TermsPage() {
         Iloomi reserves the right to modify or update these Terms of Service at any time. Users will
         be notified of any material changes, and continued use of the App after such changes
         constitutes acceptance of the modified terms.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        Questions about these terms can go to info@iloomi.com, or by mail to{" "}
+        {COMPANY_MAILING_ADDRESS}.
       </p>
     </LegalPage>
   );

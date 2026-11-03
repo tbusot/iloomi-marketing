@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { LegalPage } from '@/components/layout/LegalPage';
+import { COMPANY_MAILING_ADDRESS } from '@/lib/company';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Iloomi',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" lastModified="October 30, 2026">
+    <LegalPage title="Privacy Policy" lastModified="November 2, 2026">
       <p>
         Please read our privacy policy carefully. It is important to understand the steps that we
         take to secure your information and the people that you care about. Please direct questions
@@ -150,7 +151,8 @@ export default function PrivacyPage() {
       <h2>9. Contact Us</h2>
       <p>
         If you have any questions, concerns, or requests regarding this Privacy Policy or our
-        privacy practices, please contact us at info@iloomi.com.
+        privacy practices, please contact us at info@iloomi.com, or by mail at{" "}
+        {COMPANY_MAILING_ADDRESS}.
       </p>
     </LegalPage>
   );
