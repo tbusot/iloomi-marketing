@@ -48,7 +48,7 @@ const placeholderFAQs = [
   { id: '23', category: 'Collaboration & Sharing', title: 'Can I update my story?', content: 'Yes, you can update your story at any time. Simply log in to your account and make any changes you want. You can also add new stories, photos, and other media to your biography.' },
 
   // Privacy & Security
-  { id: '24', category: 'Privacy & Security', title: 'Is my data private?', content: 'Yes, your data is completely private. We use state-of-the-art security measures to protect your data and ensure that it is not shared with any third parties. Your data is encrypted and stored securely on our servers.' },
+  { id: '24', category: 'Privacy & Security', title: 'Is my data private?', content: 'Your stories are private by default, and you choose who can see them. To run Iloomi, we share information with service providers, including the AI providers that power conversations, story writing and narration. Your data is encrypted and stored securely. Our Privacy Policy explains what is shared and with whom.' },
   { id: '25', category: 'Privacy & Security', title: 'How can I control the privacy of my stories?', content: 'You have three privacy options: keep your stories completely private, share them with a select group of people, or make them public for anyone to read. You can adjust your privacy settings at any time from your account settings.' },
   { id: '26', category: 'Privacy & Security', title: 'Can I change the privacy settings after I\'ve created my story?', content: 'Yes, you can adjust the privacy settings of your story at any time. Whether you want to make it more private or share it with a wider audience, you have full control over who sees your biography.' },
 ];

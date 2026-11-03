@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { COMPANY_MAILING_ADDRESS } from '@/lib/company';
 
 export function Footer() {
   return (
@@ -119,9 +120,10 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-dark-green/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-dark-green/50 text-sm">
-            &copy; {new Date().getFullYear()} Iloomi Inc. All rights reserved.
-          </p>
+          <div className="text-dark-green/50 text-sm text-center md:text-left">
+            <p>&copy; {new Date().getFullYear()} Iloomi Inc. All rights reserved.</p>
+            <p>{COMPANY_MAILING_ADDRESS}</p>
+          </div>
           <div className="flex items-center gap-4 text-dark-green/50 text-sm">
             <Link href="/terms" className="hover:text-dark-green transition-colors">
               Terms &amp; Conditions
