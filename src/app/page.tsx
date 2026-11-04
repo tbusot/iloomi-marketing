@@ -4,7 +4,9 @@ import {
   BackAndForth,
   FeatureLoops,
   StorySample,
+  Pricing,
   StartStory,
+  PricingQuestions,
 } from '@/components/sections';
 
 export default function Home() {
@@ -15,7 +17,9 @@ export default function Home() {
       <BackAndForth />
       <FeatureLoops />
       <StorySample />
+      <Pricing />
       <StartStory />
+      <PricingQuestions />
     </>
   );
 }
