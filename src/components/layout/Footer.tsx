@@ -110,15 +110,6 @@ export function Footer() {
                   className="h-[42px] w-auto"
                 />
               </a>
-              <a href="https://play.google.com/store/apps/details?id=com.iloomi.app.prod" target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
-                <Image
-                  src="/images/google-play-button.svg"
-                  alt="Get it on Google Play"
-                  width={140}
-                  height={42}
-                  className="h-[42px] w-auto"
-                />
-              </a>
             </div>
           </div>
         </div>

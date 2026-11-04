@@ -2,11 +2,11 @@
 
 ## What is ILOOMI
 
-ILOOMI is **The Collaborative Biographer** — a Web, iOS, and Android app that helps users capture and preserve their life stories with the assistance of an AI biographer and contributions from family and friends.
+ILOOMI is **The Collaborative Biographer** — a Web and iOS app that helps users capture and preserve their life stories with the assistance of an AI biographer and contributions from family and friends.
 
 - **Tagline:** "Stories told together. Memories cherished forever."
 - **Status:** Live (out of beta)
-- **Platforms:** Web, iOS (App Store), Android (Google Play)
+- **Platforms:** Web, iOS (App Store). Android was dropped in Nov 2026 (the Play developer account was closed); don't add Android or Google Play links
 - **Website:** https://www.iloomi.com
 - **Contact:** info@iloomi.com
 
@@ -102,7 +102,6 @@ NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 - [ ] Hero screenshots — currently showing placeholder cards, not actual app screenshots
 - [ ] Blog post images — gradient placeholders instead of real images
 - [ ] Feature section images — placeholder icons instead of app screenshots
-- [ ] App Store / Google Play links — need actual store URLs
 - [ ] Blog content — placeholder articles, not connected to Sanity CMS content yet
 - [ ] Testimonials in Ticker — placeholder quotes, not real user testimonials
 
@@ -138,7 +137,7 @@ _references/
 │   ├── hero/              # Hero section images, app screenshot collages
 │   ├── features/          # Feature section images/illustrations
 │   ├── blog/              # Blog post thumbnails and images
-│   ├── app-store/         # App Store and Google Play badge images
+│   ├── app-store/         # App Store badge images
 │   └── misc/              # Any other images (testimonial avatars, icons, etc.)
 └── README.md              # Notes on what each asset is for
 ```
