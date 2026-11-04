@@ -3,6 +3,8 @@ export { WhyNow } from './WhyNow';
 export { BackAndForth } from './BackAndForth';
 export { FeatureLoops } from './FeatureLoops';
 export { StorySample } from './StorySample';
+export { Pricing } from './Pricing';
 export { StartStory } from './StartStory';
+export { PricingQuestions } from './PricingQuestions';
 export { BlogPreview } from './BlogPreview';
 export { FAQSection } from './FAQSection';

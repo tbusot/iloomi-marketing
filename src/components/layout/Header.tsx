@@ -10,6 +10,7 @@ import { WEB_APP_LOGIN_URL } from '@/components/ui/StoreBadges';
 const navLinks = [
   { href: '/#why-now', label: 'Why now' },
   { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
 ];
