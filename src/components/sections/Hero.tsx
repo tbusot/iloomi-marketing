@@ -38,7 +38,7 @@ export function Hero() {
           Start your first story
         </Link>
         <span className="text-[15px] text-muted">
-          Your first two stories are free. iPhone, Android and the web.
+          Your first two stories are free. iPhone and the web.
         </span>
       </div>
     </>

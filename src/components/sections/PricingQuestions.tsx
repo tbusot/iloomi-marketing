@@ -11,11 +11,11 @@ const questions = [
   },
   {
     question: 'Can I subscribe on the web?',
-    answer: 'Pro is in the iPhone and Android apps for now. The web is free for reading and adding to stories.',
+    answer: 'Pro is in the iPhone app for now. The web is free for reading and adding to stories.',
   },
   {
     question: 'How do I cancel?',
-    answer: 'In your App Store or Google Play subscriptions, anytime.',
+    answer: 'In your App Store subscriptions, anytime.',
   },
 ];
 

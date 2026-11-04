@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 export const APP_STORE_URL = 'https://apps.apple.com/us/app/iloomi/id6467228839';
-export const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.iloomi.app.prod';
 export const WEB_APP_URL = 'https://app.iloomi.com';
 export const WEB_APP_LOGIN_URL = `${WEB_APP_URL}/login`;
 
@@ -19,15 +18,6 @@ export function StoreBadges({ height = 52, className = '' }: StoreBadgesProps) {
         <Image
           src="/images/app-store-button.svg"
           alt="Download on the App Store"
-          width={width}
-          height={height}
-          style={{ height, width: 'auto' }}
-        />
-      </a>
-      <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
-        <Image
-          src="/images/google-play-button.svg"
-          alt="Get it on Google Play"
           width={width}
           height={height}
           style={{ height, width: 'auto' }}
