@@ -3,6 +3,7 @@ import {
   WhyNow,
   BackAndForth,
   FeatureLoops,
+  TellItTogether,
   StorySample,
   Pricing,
   StartStory,
@@ -16,6 +17,7 @@ export default function Home() {
       <WhyNow />
       <BackAndForth />
       <FeatureLoops />
+      <TellItTogether />
       <StorySample />
       <Pricing />
       <StartStory />

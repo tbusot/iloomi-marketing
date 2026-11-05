@@ -2,6 +2,7 @@ export { Hero } from './Hero';
 export { WhyNow } from './WhyNow';
 export { BackAndForth } from './BackAndForth';
 export { FeatureLoops } from './FeatureLoops';
+export { TellItTogether } from './TellItTogether';
 export { StorySample } from './StorySample';
 export { Pricing } from './Pricing';
 export { StartStory } from './StartStory';
