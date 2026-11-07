@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <LegalPage title="Terms & Conditions" lastModified="November 2, 2026">
+    <LegalPage title="Terms & Conditions" lastModified="November 6, 2026">
       <p>
         Please read our terms carefully. It is important to understand the steps that we take to
         secure your information and the people that you care about. Please direct questions to
@@ -74,12 +74,29 @@ export default function TermsPage() {
       <p>
         When you cancel, your subscription stays active until the end of the period you have paid
         for. Refunds for App Store and Google Play purchases are handled by Apple and Google under
-        their policies. Except where required by law, payments made on our website are
-        non-refundable.
+        their policies. Except where required by law, or as described under Gifts below, payments
+        made on our website are non-refundable.
       </p>
       <p>
         We may change subscription prices or what is included. We will give you notice of any price
         change, and it will apply from your next billing period.
+      </p>
+
+      <h2 id="gifts">Gifts</h2>
+      <p>
+        You can buy one year of Iloomi Pro as a gift on our website for a one-time payment of
+        US$99. Sales tax is added at checkout where required. A gift is not a subscription: it does not renew, and you will not be charged again.
+      </p>
+      <p>
+        The person you give it to receives a gift code. The year of Pro starts when the code is
+        claimed, not when it is bought. Each code can be claimed once, by one Iloomi account. When
+        the year ends, Pro ends; the recipient can choose to subscribe at the regular price, and
+        the stories they told stay theirs to read.
+      </p>
+      <p>
+        Gift codes have no cash value and cannot be exchanged for cash. A gift that has not been
+        claimed can be refunded on request: email support@iloomi.com. Once a gift has been
+        claimed, it is non-refundable except where required by law.
       </p>
 
       <h2>Account Cancellation</h2>

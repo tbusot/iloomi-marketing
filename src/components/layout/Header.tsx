@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/#pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
+  { href: '/gift', label: 'Give Iloomi' },
 ];
 
 export function Header() {
@@ -66,7 +67,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation — centered */}
-        <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+        <div className="hidden lg:flex items-center gap-7 whitespace-nowrap absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -81,7 +82,7 @@ export function Header() {
         </div>
 
         {/* Log in and Start a story — right aligned; outlined over the dark hero */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex whitespace-nowrap items-center gap-6">
           <a
             href={WEB_APP_LOGIN_URL}
             className={`hover:text-purple transition-colors font-medium ${
@@ -104,7 +105,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 transition-colors duration-300 ${
+          className={`lg:hidden p-2 transition-colors duration-300 ${
             isScrolled || !isDarkHero ? 'text-dark-green' : 'text-white'
           }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -142,7 +143,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100"
+            className="lg:hidden bg-white border-t border-gray-100"
           >
             <div className="px-6 py-4 space-y-4">
               {navLinks.map((link) => (

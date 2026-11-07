@@ -52,6 +52,11 @@ export function Footer() {
                   Start a story
                 </Link>
               </li>
+              <li>
+                <Link href="/gift" className="text-dark-green/70 hover:text-dark-green transition-colors">
+                  Give Iloomi
+                </Link>
+              </li>
             </ul>
           </div>
 
