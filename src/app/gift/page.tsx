@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { GiftForm, GiftFormPlaceholder } from '@/components/gift/GiftForm';
+import { RedeemGift } from '@/components/gift/RedeemGift';
 import { WatchPlayer } from '@/components/ui/WatchPlayer';
 import { GIFT_PRICE, GIFT_SUPPORT_EMAIL } from '@/lib/gift';
 import { getWatchVideo } from '@/lib/watch';
@@ -77,6 +78,9 @@ export default function GiftPage() {
   return (
     <>
       <section className="px-6 pt-28 pb-20 md:pt-36 md:pb-24">
+        <div className="mx-auto max-w-[1080px]">
+          <RedeemGift />
+        </div>
         <div className="mx-auto flex max-w-[1080px] flex-wrap items-center gap-x-14 gap-y-12">
           <div className="min-w-0 flex-[1_1_560px]">
             <p className="mb-3.5 text-[13px] font-bold uppercase tracking-[0.14em] text-marine-teal">

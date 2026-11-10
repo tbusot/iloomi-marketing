@@ -9,6 +9,16 @@ export const GIFT_API_BASE =
 export const GIFT_PRICE = 99;
 export const GIFT_CURRENCY = 'USD';
 export const GIFT_CLAIM_HOST = 'app.iloomi.com/gift';
+export const GIFT_CLAIM_URL = `https://${GIFT_CLAIM_HOST}`;
+
+/**
+ * Gift codes are 8 letters and numbers, shown as XXXX-XXXX. Formats what's
+ * typed or pasted so nobody has to type the dash.
+ */
+export function formatGiftCode(input: string) {
+  const raw = input.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+  return raw.length > 4 ? `${raw.slice(0, 4)}-${raw.slice(4)}` : raw;
+}
 export const GIFT_SUPPORT_EMAIL = 'support@iloomi.com';
 
 export const NAME_MAX = 80;
