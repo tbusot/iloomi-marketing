@@ -13,7 +13,7 @@ interface StoreBadgesProps {
 export function StoreBadges({ height = 52, className = '' }: StoreBadgesProps) {
   const width = Math.round((height * 140) / 42);
   return (
-    <div className={`flex flex-wrap gap-3 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="inline-block w-fit">
         <Image
           src="/images/app-store-button.svg"
@@ -24,6 +24,24 @@ export function StoreBadges({ height = 52, className = '' }: StoreBadgesProps) {
         />
       </a>
       <WebAppBadge height={height} />
+      <AppStoreQr size={Math.round(height * 1.6)} />
+    </div>
+  );
+}
+
+/** On a computer, the App Store link as a QR code to scan with an iPhone. */
+function AppStoreQr({ size }: { size: number }) {
+  return (
+    <div className="ml-2 hidden items-center gap-3 lg:flex">
+      <Image
+        src="/images/app-store-qr.svg"
+        alt="QR code for Iloomi on the App Store"
+        width={size}
+        height={size}
+        unoptimized
+        className="rounded-lg bg-white p-1.5"
+      />
+      <span className="max-w-[7rem] text-sm leading-snug opacity-75">Scan with your iPhone camera</span>
     </div>
   );
 }
