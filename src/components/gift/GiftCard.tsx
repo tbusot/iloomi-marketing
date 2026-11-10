@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import QRCode from 'qrcode';
 import { GIFT_CLAIM_HOST } from '@/lib/gift';
 
 interface GiftCardProps {
@@ -61,8 +65,40 @@ export function GiftCard({ recipientName, buyerName, message, code, claimUrl }: 
           <li>Start talking. Iloomi asks the first question.</li>
         </ol>
 
-        <p className="mt-7 text-sm break-all text-muted">Or go straight to {claimUrl.replace(/^https?:\/\//, '')}</p>
+        <ClaimQr url={claimUrl} />
+        <p className="mt-3 text-sm break-all text-muted">Or go straight to {claimUrl.replace(/^https?:\/\//, '')}</p>
       </div>
+    </div>
+  );
+}
+
+/** The claim link as a QR code: point a phone's camera at it to open the gift. */
+function ClaimQr({ url }: { url: string }) {
+  const [svg, setSvg] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    QRCode.toString(url, { type: 'svg', margin: 0 })
+      .then((markup) => active && setSvg(markup))
+      .catch((err) => console.error('QR generation failed:', err));
+    return () => {
+      active = false;
+    };
+  }, [url]);
+
+  return (
+    <div className="mt-8 flex flex-col items-center gap-2 print:mt-6">
+      {svg ? (
+        <div
+          role="img"
+          aria-label="QR code that opens this gift"
+          className="h-32 w-32 print:h-24 print:w-24 [&>svg]:h-full [&>svg]:w-full"
+          // SVG markup generated locally from our own claim URL.
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+      ) : (
+        <div className="h-32 w-32" />
+      )}
+      <p className="text-sm text-muted">Or scan this with a phone&apos;s camera</p>
     </div>
   );
 }
