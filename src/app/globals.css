@@ -283,3 +283,33 @@ body {
   background: #7C3AED !important;
 }
 
+
+/*
+ * Printing /gift/thanks: only the gift card, on one letter-size page. Scoped with
+ * :has() so printing any other page is unaffected.
+ */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  body:has(.gift-card-print) {
+    background: white;
+  }
+
+  body:has(.gift-card-print) > *:not(main),
+  body:has(.gift-card-print) main > *:not(:has(.gift-card-print)) {
+    display: none !important;
+  }
+
+  .gift-card-print {
+    max-width: none;
+    box-shadow: none;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    /* Scaled so a long note still fits on one page */
+    zoom: 0.92;
+  }
+}

@@ -5,6 +5,7 @@ export { FeatureLoops } from './FeatureLoops';
 export { TellItTogether } from './TellItTogether';
 export { StorySample } from './StorySample';
 export { Pricing } from './Pricing';
+export { GiftCallout } from './GiftCallout';
 export { StartStory } from './StartStory';
 export { PricingQuestions } from './PricingQuestions';
 export { BlogPreview } from './BlogPreview';

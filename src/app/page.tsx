@@ -6,6 +6,7 @@ import {
   TellItTogether,
   StorySample,
   Pricing,
+  GiftCallout,
   StartStory,
   PricingQuestions,
 } from '@/components/sections';
@@ -20,6 +21,7 @@ export default function Home() {
       <TellItTogether />
       <StorySample />
       <Pricing />
+      <GiftCallout />
       <StartStory />
       <PricingQuestions />
     </>
