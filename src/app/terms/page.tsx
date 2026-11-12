@@ -85,7 +85,7 @@ export default function TermsPage() {
       <h2 id="gifts">Gifts</h2>
       <p>
         You can buy one year of Iloomi Pro as a gift on our website for a one-time payment of
-        US$99. Sales tax is added at checkout where required. A gift is not a subscription: it does not renew, and you will not be charged again.
+        US$99 (US$79 for gifts bought through December 31, 2026). Sales tax is added at checkout where required. A gift is not a subscription: it does not renew, and you will not be charged again.
       </p>
       <p>
         The person you give it to receives a gift code. The year of Pro starts when the code is

@@ -4,13 +4,16 @@ import { Suspense } from 'react';
 import { GiftForm, GiftFormPlaceholder } from '@/components/gift/GiftForm';
 import { RedeemGift } from '@/components/gift/RedeemGift';
 import { WatchPlayer } from '@/components/ui/WatchPlayer';
-import { GIFT_PRICE, GIFT_SUPPORT_EMAIL } from '@/lib/gift';
+import { GIFT_REGULAR_PRICE, GIFT_SUPPORT_EMAIL, giftPrice, isGiftHolidayPrice } from '@/lib/gift';
 import { getWatchVideo } from '@/lib/watch';
 
 const SITE_URL = 'https://www.iloomi.com';
+
+// The price changes on Jan 1; rebuild the page hourly so it shows the right one.
+export const revalidate = 3600;
 const title = 'Give Mom her story: a year of Iloomi Pro | Iloomi';
 const description =
-  'A gift for a parent or grandparent: a year of talking with Iloomi, which writes their stories down for the family to keep. $99 plus applicable sales tax, paid once.';
+  'A gift for a parent or grandparent: a year of talking with Iloomi, which writes their stories down for the family to keep. Paid once, nothing renews.';
 
 export const metadata: Metadata = {
   title,
@@ -37,8 +40,8 @@ const included = [
     body: 'When they’re done, Iloomi writes the story up the way they told it, ready to read and keep.',
   },
   {
-    title: 'The family reads and adds',
-    body: 'They can invite you in to read each story or add your side of it, from any browser.',
+    title: 'You get to read them',
+    body: 'They invite you in to read each story and add your side of it, from any browser. Family reads free.',
   },
   {
     title: 'iPhone or the web',
@@ -51,6 +54,11 @@ const questions = [
     question: 'How do they get it?',
     answer:
       'We email them on the date you pick, with their code and how to start. Right after checkout you also get a card to print, if you’d rather hand it over yourself.',
+  },
+  {
+    question: 'Can it arrive on Christmas morning?',
+    answer:
+      'Yes. Pick December 25 as the date, and their email goes out at 8am Eastern that morning. Or print the card and put it under the tree.',
   },
   {
     question: 'What if they’re not good with technology?',
@@ -105,7 +113,15 @@ export default function GiftPage() {
                 Give Iloomi
               </a>
               <span className="text-[15px] text-muted">
-                ${GIFT_PRICE} plus applicable sales tax, paid once. No subscription, nothing renews.
+                {isGiftHolidayPrice() ? (
+                  <>
+                    <strong className="font-semibold text-ink">Holiday price ${giftPrice()}</strong>{' '}
+                    <s>${GIFT_REGULAR_PRICE}</s> through Dec 31, plus applicable sales tax.
+                  </>
+                ) : (
+                  <>${giftPrice()} plus applicable sales tax.</>
+                )}{' '}
+                Paid once, nothing renews.
               </span>
             </div>
           </div>
@@ -162,7 +178,7 @@ export default function GiftPage() {
               Send the gift
             </p>
             <h2 className="font-serif text-4xl leading-[1.05] text-ink md:text-5xl">
-              ${GIFT_PRICE} + tax
+              ${giftPrice()} + tax
               <br />
               <em className="font-normal text-dark-green">for a whole year.</em>
             </h2>
@@ -170,7 +186,7 @@ export default function GiftPage() {
               {[
                 'One year of Iloomi Pro',
                 'Starts when they enter their code',
-                'An email to them on the day you pick',
+                'An email to them on the day you pick, like Christmas morning',
                 'A card for you to print and give',
               ].map((item) => (
                 <li key={item} className="flex gap-3">
@@ -181,6 +197,11 @@ export default function GiftPage() {
                 </li>
               ))}
             </ul>
+            {isGiftHolidayPrice() ? (
+              <p className="mt-6 text-[15px] text-muted">
+                Holiday price through December 31, then ${GIFT_REGULAR_PRICE}.
+              </p>
+            ) : null}
           </div>
 
           <Suspense fallback={<GiftFormPlaceholder />}>

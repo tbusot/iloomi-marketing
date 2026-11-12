@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import {
   DELIVER_MAX_DAYS,
   GIFT_API_BASE,
-  GIFT_PRICE,
+  giftPrice,
   MESSAGE_MAX,
   NAME_MAX,
   addDays,
@@ -204,7 +204,7 @@ function GiftFormFields() {
         disabled={sending}
         className="mt-8 inline-flex min-h-[56px] w-full items-center justify-center rounded-full bg-dark-green px-7 text-[17px] font-semibold text-white transition-colors hover:bg-dark-green/90 disabled:cursor-wait disabled:opacity-70"
       >
-        {sending ? 'Taking you to checkout…' : `Continue to payment · $${GIFT_PRICE} + tax`}
+        {sending ? 'Taking you to checkout…' : `Continue to payment · $${giftPrice()} + tax`}
       </button>
       <p className="mt-3.5 text-center text-sm text-muted">
         Sales tax is added at checkout where it applies. Secure payment with Stripe. Paid once, nothing renews.

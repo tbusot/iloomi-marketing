@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GIFT_PRICE } from '@/lib/gift';
+import { giftPrice, isGiftHolidayPrice } from '@/lib/gift';
 
 /** A small pointer from pricing to /gift, for people buying it for a parent. */
 export function GiftCallout() {
@@ -12,7 +12,7 @@ export function GiftCallout() {
             Give Mom her story, <em className="font-normal text-dark-green">in her own words.</em>
           </p>
           <p className="mt-2.5 text-[17px] text-muted">
-            A year of Iloomi Pro for ${GIFT_PRICE} plus applicable sales tax, paid once. They talk, Iloomi writes it down.
+            A year of Iloomi Pro for ${giftPrice()} plus applicable sales tax, paid once{isGiftHolidayPrice() ? ' (holiday price through Dec 31)' : ''}. They talk, Iloomi writes it down.
           </p>
         </div>
         <Link
