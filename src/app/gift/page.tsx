@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { GiftForm, GiftFormPlaceholder } from '@/components/gift/GiftForm';
+import { GiftInterest } from '@/components/gift/GiftInterest';
 import { RedeemGift } from '@/components/gift/RedeemGift';
 import { WatchPlayer } from '@/components/ui/WatchPlayer';
 import { GIFT_REGULAR_PRICE, GIFT_SUPPORT_EMAIL, giftPrice, isGiftHolidayPrice } from '@/lib/gift';
@@ -85,6 +86,7 @@ export default function GiftPage() {
 
   return (
     <>
+      <GiftInterest />
       <section className="px-6 pt-28 pb-20 md:pt-36 md:pb-24">
         <div className="mx-auto max-w-[1080px]">
           <RedeemGift />

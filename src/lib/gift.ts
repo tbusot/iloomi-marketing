@@ -46,6 +46,40 @@ export interface GiftCheckoutRequest {
   /** YYYY-MM-DD */
   deliverOn: string;
   message: string;
+  /** The email that brought them here (see giftRef). */
+  ref?: string;
+}
+
+const GIFT_REF_KEY = 'iloomi-gift-ref';
+
+/**
+ * The ?ref= on gift links in our emails: that email's id, so we know who
+ * looked at the gift. Kept in this browser, so coming back later without the
+ * link (or after a canceled checkout) still counts for that email.
+ */
+export function giftRef(): string | null {
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get('ref');
+    if (fromUrl && /^[A-Za-z0-9_-]{8,40}$/.test(fromUrl)) {
+      localStorage.setItem(GIFT_REF_KEY, fromUrl);
+      return fromUrl;
+    }
+    return localStorage.getItem(GIFT_REF_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** Tells Iloomi that someone from one of our emails visited /gift, or spent real time on it. */
+export function trackGiftInterest(kind: 'visit' | 'engaged') {
+  const ref = giftRef();
+  if (!ref) return;
+  fetch(`${GIFT_API_BASE}/giftInterest`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ref, kind }),
+    keepalive: true,
+  }).catch(() => {});
 }
 
 export type GiftStatusValue = 'pending' | 'paid' | 'claimed' | 'refunded';
