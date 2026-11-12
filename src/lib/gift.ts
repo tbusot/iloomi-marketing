@@ -1,12 +1,24 @@
 /**
- * The $99 gift: one year of Iloomi Pro, bought on the web. Checkout and status
+ * The gift: one year of Iloomi Pro, bought on the web. Checkout and status
  * are Firebase Functions (giftCheckout, giftStatus); Stripe Checkout takes the
  * payment and sends the buyer back to /gift/thanks.
  */
 export const GIFT_API_BASE =
   process.env.NEXT_PUBLIC_GIFT_API_BASE ?? 'https://us-central1-iloomi-b34f8.cloudfunctions.net';
 
-export const GIFT_PRICE = 99;
+/** $99, or $79 through Dec 31 (midnight Jan 1 Eastern). Keep in step with iloomi_firebase util/gifts.ts. */
+export const GIFT_REGULAR_PRICE = 99;
+export const GIFT_HOLIDAY_PRICE = 79;
+export const GIFT_HOLIDAY_PRICE_ENDS = '2027-01-01T05:00:00Z';
+
+export function isGiftHolidayPrice(now = Date.now()) {
+  return now < Date.parse(GIFT_HOLIDAY_PRICE_ENDS);
+}
+
+/** What a gift costs right now, in dollars. */
+export function giftPrice(now = Date.now()) {
+  return isGiftHolidayPrice(now) ? GIFT_HOLIDAY_PRICE : GIFT_REGULAR_PRICE;
+}
 export const GIFT_CURRENCY = 'USD';
 export const GIFT_CLAIM_HOST = 'app.iloomi.com/gift';
 export const GIFT_CLAIM_URL = `https://${GIFT_CLAIM_HOST}`;
@@ -116,10 +128,19 @@ export function validateGift(form: GiftCheckoutRequest, today = new Date()): Gif
 
 /**
  * Called once per gift on /gift/thanks, after giftStatus confirms payment.
+ * Google Analytics credits the purchase to where the buyer came from (an
+ * email's utm tags, or an ad), deduped by the gift id.
  *
  * TODO(meta-pixel): the Meta Pixel isn't installed yet. Once it is, fire the
- * Purchase event here, deduped by the gift id:
- *   window.fbq?.('track', 'Purchase', { value: GIFT_PRICE, currency: GIFT_CURRENCY }, { eventID: giftId });
+ * Purchase event here too:
+ *   window.fbq?.('track', 'Purchase', { value: giftPrice(), currency: GIFT_CURRENCY }, { eventID: giftId });
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function trackGiftPurchase(giftId: string) {}
+export function trackGiftPurchase(giftId: string) {
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  gtag?.('event', 'purchase', {
+    transaction_id: giftId,
+    value: giftPrice(),
+    currency: GIFT_CURRENCY,
+    items: [{ item_id: 'gift-year-pro', item_name: 'Iloomi gift: one year of Pro', price: giftPrice(), quantity: 1 }],
+  });
+}
