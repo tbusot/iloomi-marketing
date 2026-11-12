@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Playfair_Display, Inter, Source_Serif_4 } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
 import { ScrollToTop } from "@/components/ui";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-9STHC4N1QC";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -57,6 +60,15 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
+        {/* "Iloomi Marketing Website" stream in the Iloomi Prod GA property. Production only. */}
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
