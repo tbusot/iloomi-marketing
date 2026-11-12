@@ -6,6 +6,7 @@ import {
   DELIVER_MAX_DAYS,
   GIFT_API_BASE,
   giftPrice,
+  giftRef,
   MESSAGE_MAX,
   NAME_MAX,
   addDays,
@@ -101,6 +102,7 @@ function GiftFormFields() {
       recipientEmail: form.recipientEmail.trim(),
       deliverOn: form.deliverOn,
       message: form.message.trim(),
+      ref: giftRef() ?? undefined,
     };
 
     setSending(true);
